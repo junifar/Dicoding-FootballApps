@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import org.jetbrains.anko.*
+import org.jetbrains.anko.design.appBarLayout
+import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.support.v4.ctx
 
 class MatchFragment: Fragment(), AnkoComponent<Context>{
@@ -20,11 +22,29 @@ class MatchFragment: Fragment(), AnkoComponent<Context>{
     }
 
     private fun setupUI(ui:AnkoContext<Context>) = with(ui){
-        linearLayout {
+        coordinatorLayout {
             lparams(
                 width = matchParent,
                 height = matchParent
             )
+
+            fitsSystemWindows = true
+
+            appBarLayout {
+                lparams(
+                    width = matchParent,
+                    height = wrapContent
+                )
+                topPadding = dip(8)
+                toolbar {
+                    lparams(
+                        width = matchParent,
+                        height = android.R.attr.actionBarSize
+                    )
+                }.lparams{
+                    weight = 1f
+                }
+            }
 
             textView {
                 text = "Match test"
