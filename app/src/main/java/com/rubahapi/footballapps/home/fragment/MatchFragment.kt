@@ -28,14 +28,14 @@ class MatchFragment: Fragment(), AnkoComponent<Context>{
                 height = matchParent
             )
 
-            fitsSystemWindows = true
+            fitsSystemWindows = false
 
             appBarLayout {
                 lparams(
                     width = matchParent,
                     height = wrapContent
                 )
-                topPadding = dip(8)
+//                topPadding = dip(8)
                 toolbar {
                     lparams(
                         width = matchParent,
