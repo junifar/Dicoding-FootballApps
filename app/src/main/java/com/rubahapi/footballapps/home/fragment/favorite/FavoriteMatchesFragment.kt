@@ -1,4 +1,4 @@
-package com.rubahapi.footballapps.home.fragment.match
+package com.rubahapi.footballapps.home.fragment.favorite
 
 import android.content.Context
 import android.os.Bundle
@@ -13,9 +13,8 @@ import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.textView
 
-class PastMatchFragment: Fragment(), AnkoComponent<Context>{
-
-    override fun createView(ui: AnkoContext<Context>):View{
+class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context> {
+    override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
     }
 
@@ -24,20 +23,18 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>{
     }
 
     private fun setupUI(ui:AnkoContext<Context>) = with(ui){
-        coordinatorLayout{
-            lparams(
-                width = matchParent,
+        coordinatorLayout {
+            lparams{
+                width = matchParent
                 height = matchParent
-            )
-            textView {
-                text = "Past Match"
             }
+            textView { text = "Favorite Matches" }
         }
     }
 
     companion object {
-        fun newInstance(): PastMatchFragment {
-            val fragment = PastMatchFragment()
+        fun newInstance(): FavoriteMatchesFragment{
+            val fragment = FavoriteMatchesFragment()
             val args = Bundle()
             fragment.arguments = args
             return fragment
