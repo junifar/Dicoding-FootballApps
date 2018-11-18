@@ -15,15 +15,15 @@ class HomeActivity : AppCompatActivity() {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_home -> {
+            R.id.navigation_match -> {
                 loadMatchFragment(savedInstanceState)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            R.id.navigation_teams -> {
                 loadTeamFragment(savedInstanceState)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_notifications -> {
+            R.id.navigation_favorite -> {
                 loadFavoriteFragment(savedInstanceState)
                 return@OnNavigationItemSelectedListener true
             }

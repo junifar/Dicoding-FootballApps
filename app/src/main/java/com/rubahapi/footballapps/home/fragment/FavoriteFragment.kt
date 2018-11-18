@@ -22,7 +22,7 @@ import org.jetbrains.anko.design.themedAppBarLayout
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.viewPager
 
-class FavoriteFragment: Fragment(), AnkoComponent<Context>{
+class FavoriteFragment: Fragment(), AnkoComponent<Context> {
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
@@ -56,7 +56,7 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context>{
         layoutTab.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
     }
 
-    private fun setupUI(ui:AnkoContext<Context>) = with(ui){
+    private fun setupUI(ui: AnkoContext<Context>) = with(ui){
         coordinatorLayout {
             lparams(
                 width = matchParent,
