@@ -14,12 +14,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.home.fragment.match.nextmatch.NextMatchFragment
-import com.rubahapi.footballapps.home.fragment.match.PastMatchFragment
+import com.rubahapi.footballapps.home.fragment.match.pastmatch.PastMatchFragment
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.tabLayout
 import org.jetbrains.anko.design.themedAppBarLayout
-import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.viewPager
 
 class MatchFragment: Fragment(), AnkoComponent<Context>{
