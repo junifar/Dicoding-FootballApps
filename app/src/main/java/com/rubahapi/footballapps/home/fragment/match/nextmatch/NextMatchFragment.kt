@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,10 +18,11 @@ import com.rubahapi.footballapps.R.color.colorAccent
 import com.rubahapi.footballapps.api.ApiRepository
 import com.rubahapi.footballapps.models.League
 import com.rubahapi.footballapps.models.LeagueResponse
+import com.rubahapi.footballapps.models.Match
 import com.rubahapi.footballapps.util.invisible
 import com.rubahapi.footballapps.util.visible
 import org.jetbrains.anko.*
-import org.jetbrains.anko.support.v4.onRefresh
+import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 import org.jetbrains.anko.support.v4.toast
 
@@ -29,8 +32,11 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
     private lateinit var progressBar: ProgressBar
     private lateinit var spinner: Spinner
     private lateinit var league:League
+    private lateinit var matchRecyclerView:RecyclerView
 
     private lateinit var presenter: NextMatchPresenter
+    private lateinit var nextMatchAdapter: NextMatchAdapter
+    private var nextMatches: MutableList<Match> = mutableListOf()
 
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
@@ -50,6 +56,12 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
             presenter.getLeague()
             swipeRefresh.isRefreshing = false
         }
+
+        nextMatchAdapter = NextMatchAdapter(nextMatches) {
+            toast("Yeah")
+        }
+
+        matchRecyclerView.adapter = nextMatchAdapter
     }
 
 
@@ -79,7 +91,13 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
                         height = wrapContent
                     }
 
-                    textView { text = "Next Match" }
+                    matchRecyclerView = recyclerView {
+                        lparams(
+                            width = matchParent,
+                            height =  matchParent
+                        )
+                        layoutManager = LinearLayoutManager(ctx)
+                    }
 
                     progressBar = progressBar {
                         visibility = View.INVISIBLE
@@ -106,10 +124,16 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 league = spinner.selectedItem as League
-                toast(league.leagueId.toString())
+                league.leagueId?.let { presenter.getMatch(it) }
             }
-
         }
+    }
+
+    override fun showNextMatch(data: List<Match>) {
+        swipeRefresh.isRefreshing = false
+        nextMatches.clear()
+        nextMatches.addAll(data)
+        nextMatchAdapter.notifyDataSetChanged()
     }
 
     companion object {
