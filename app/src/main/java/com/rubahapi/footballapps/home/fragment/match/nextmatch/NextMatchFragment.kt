@@ -46,6 +46,10 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
         presenter = NextMatchPresenter(this, request, gson)
         presenter.getLeague()
 
+        swipeRefresh.setOnRefreshListener {
+            presenter.getLeague()
+            swipeRefresh.isRefreshing = false
+        }
     }
 
 
