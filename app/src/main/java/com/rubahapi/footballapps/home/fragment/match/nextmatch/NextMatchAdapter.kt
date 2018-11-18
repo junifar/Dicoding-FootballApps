@@ -40,6 +40,9 @@ class NextMatchesUI : AnkoComponent<ViewGroup>{
         return with(ui){
             cardView {
                 padding = dip(5)
+                cardElevation = dip(6).toFloat()
+                radius = dip(5).toFloat()
+                useCompatPadding = true
                 lparams {
                     width = matchParent
                     height = wrapContent

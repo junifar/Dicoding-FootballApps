@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.rubahapi.footballapps.R
+import com.rubahapi.footballapps.R.color.material_grey_300
 import com.rubahapi.footballapps.models.Match
 import com.rubahapi.footballapps.util.toSimpleString
 import com.rubahapi.footballapps.R.id.event_date
@@ -43,8 +44,10 @@ class NextMatchesUI : AnkoComponent<ViewGroup>{
                 lparams {
                     width = matchParent
                     height = wrapContent
-                    radius = dip(4f).toFloat()
                 }
+                cardElevation = dip(6).toFloat()
+                radius = dip(5).toFloat()
+                useCompatPadding = true
                 linearLayout {
                     lparams(width = matchParent, height = wrapContent)
                     padding = dip(16)
