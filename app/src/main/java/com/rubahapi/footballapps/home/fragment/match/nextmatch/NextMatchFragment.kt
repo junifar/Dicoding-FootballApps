@@ -16,6 +16,7 @@ import android.widget.Spinner
 import com.google.gson.Gson
 import com.rubahapi.footballapps.R.color.colorAccent
 import com.rubahapi.footballapps.api.ApiRepository
+import com.rubahapi.footballapps.matchdetail.nextmatch.NextMatchDetailActivity
 import com.rubahapi.footballapps.models.League
 import com.rubahapi.footballapps.models.LeagueResponse
 import com.rubahapi.footballapps.models.Match
@@ -23,8 +24,8 @@ import com.rubahapi.footballapps.util.invisible
 import com.rubahapi.footballapps.util.visible
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import org.jetbrains.anko.support.v4.toast
 
 class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
 
@@ -58,7 +59,7 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
         }
 
         nextMatchAdapter = NextMatchAdapter(nextMatches) {
-            toast("Yeah")
+            startActivity<NextMatchDetailActivity>("item" to it)
         }
 
         matchRecyclerView.adapter = nextMatchAdapter
