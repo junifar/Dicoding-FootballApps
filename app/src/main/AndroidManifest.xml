@@ -28,6 +28,7 @@
         </activity>
         <activity android:name=".matchdetail.pastmatch.PastMatchDetailActivity"/>
         <activity android:name=".matchdetail.nextmatch.NextMatchDetailActivity"/>
+        <activity android:name=".favoritedetail.favoritedetailmatch.FavoriteDetailMatchActivity"/>
     </application>
 
 </manifest>
