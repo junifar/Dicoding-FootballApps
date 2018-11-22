@@ -23,7 +23,6 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import org.jetbrains.anko.support.v4.toast
 
 class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView {
 
@@ -56,7 +55,6 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
     private fun callConfiguration(){
         adapter = FavoriteAdapter(favorites){
             startActivity<FavoriteDetailMatchActivity>("id" to it.eventID)
-            toast("Test")
         }
 
         favoriteList.adapter = adapter
