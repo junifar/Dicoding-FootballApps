@@ -34,12 +34,12 @@ class FavoriteDetailMatchPresenter(private val view: FavoriteDetailMatchView,
 //        GlobalScope.async {
 //            view.showHomeFlag(data.await().teams)
 //        }
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getTeamFlag(teamID)).await(),
                 TeamResponse::class.java)
 
             view.showAwayFlag(data.teams)
-            view.showHomeFlag(data.teams)
+//            view.showHomeFlag(data.teams)
         }
     }
 }

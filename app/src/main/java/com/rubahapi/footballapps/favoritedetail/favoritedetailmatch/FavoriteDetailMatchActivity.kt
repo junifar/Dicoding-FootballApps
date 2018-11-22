@@ -20,6 +20,7 @@ import com.rubahapi.footballapps.api.ApiRepository
 import com.rubahapi.footballapps.db.Favorite
 import com.rubahapi.footballapps.db.database
 import com.rubahapi.footballapps.models.Team
+import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
@@ -174,7 +175,7 @@ class FavoriteDetailMatchActivity: AppCompatActivity(), FavoriteDetailMatchView{
             imgUrl = it.teamBadge.toString()
             teamName = it.teamName.toString()
         }
-//        Picasso.get().load(imgUrl).fit().into(imageHomeMatch)
+        Picasso.get().load(imgUrl).fit().into(imageHomeMatch)
         teamHomeName.text = teamName
     }
 
@@ -186,7 +187,7 @@ class FavoriteDetailMatchActivity: AppCompatActivity(), FavoriteDetailMatchView{
             teamName = it.teamName.toString()
         }
         toast(imgUrl)
-//        Picasso.get().load(imgUrl).fit().into(imageAwayMatch)
+        Picasso.get().load(imgUrl).fit().into(imageAwayMatch)
         teamAwayName.text = teamName
     }
 
