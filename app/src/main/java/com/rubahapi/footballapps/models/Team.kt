@@ -1,10 +1,10 @@
 package com.rubahapi.footballapps.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-/**
- * Created by root on 1/23/18.
- */
+@Parcelize
 data class Team(
         @SerializedName("idTeam")
         var teamId: String? = null,
@@ -24,4 +24,4 @@ data class Team(
         @SerializedName("strDescriptionEN")
         var strDescriptionEN:String? = null
 
-        )
+        ):Parcelable

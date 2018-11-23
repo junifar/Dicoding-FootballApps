@@ -21,14 +21,15 @@ import com.rubahapi.footballapps.api.ApiRepository
 import com.rubahapi.footballapps.models.League
 import com.rubahapi.footballapps.models.LeagueResponse
 import com.rubahapi.footballapps.models.Team
+import com.rubahapi.footballapps.teamdetail.TeamDetailActivity
 import com.rubahapi.footballapps.util.invisible
 import com.rubahapi.footballapps.util.visible
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.themedAppBarLayout
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import org.jetbrains.anko.support.v4.toast
 
 class TeamFragment:Fragment(), AnkoComponent<Context>, TeamView {
     lateinit var appBarLayout: AppBarLayout
@@ -68,7 +69,7 @@ class TeamFragment:Fragment(), AnkoComponent<Context>, TeamView {
         }
 
         teamLeagueAdapter = TeamAdapter(teamLeague){
-            toast(it.teamName.toString())
+            startActivity<TeamDetailActivity>("item" to it)
         }
 
         teamRecyclerView.adapter = teamLeagueAdapter
