@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.home.fragment.FavoriteFragment
 import com.rubahapi.footballapps.home.fragment.MatchFragment
-import com.rubahapi.footballapps.home.fragment.TeamFragment
+import com.rubahapi.footballapps.home.fragment.team.TeamFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
