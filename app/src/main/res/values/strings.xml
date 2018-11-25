@@ -104,4 +104,6 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="image_thumb_description">Image Thumb</string>
+    <string name="tab_overviews">Overviews</string>
+    <string name="tab_players">Players</string>
 </resources>
