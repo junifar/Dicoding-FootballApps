@@ -15,7 +15,7 @@ import com.rubahapi.footballapps.db.Teams
 import com.rubahapi.footballapps.db.database
 import com.rubahapi.footballapps.models.Team
 import com.rubahapi.footballapps.teamdetail.fragment.TeamDetailDescriptionFragment
-import com.rubahapi.footballapps.teamdetail.fragment.TeamDetailSquadFragment
+import com.rubahapi.footballapps.teamdetail.fragment.Squad.TeamDetailSquadFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_team_detail.*
 import org.jetbrains.anko.db.classParser
@@ -137,7 +137,7 @@ class TeamDetailActivity: AppCompatActivity(){
         override fun getItem(position: Int): Fragment {
             return when(position){
                 0-> TeamDetailDescriptionFragment.newInstance(item.strDescriptionEN?:"")
-                else-> TeamDetailSquadFragment.newInstance()
+                else-> TeamDetailSquadFragment.newInstance((item.teamId?:0).toString())
             }
 
         }
