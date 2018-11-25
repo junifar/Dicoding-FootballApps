@@ -13,6 +13,8 @@ import android.widget.ProgressBar
 import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.db.Teams
 import com.rubahapi.footballapps.db.database
+import com.rubahapi.footballapps.models.Team
+import com.rubahapi.footballapps.teamdetail.TeamDetailActivity
 import com.rubahapi.footballapps.util.invisible
 import com.rubahapi.footballapps.util.visible
 import org.jetbrains.anko.*
@@ -20,6 +22,7 @@ import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 import org.jetbrains.anko.support.v4.toast
 
@@ -66,7 +69,9 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
     private fun callConfiguration() {
         adapter = FavoriteTeamAdapter(favoriteTeam){
 //            startActivity<FavoriteDetailMatchActivity>("id" to it.eventID)
-            toast(it.teamName.toString())
+            var team:Team = Team(it.teamID, it.teamName, it.teamBadge, it.intFormedYear?.toInt(), it.strStadium, it.strDescription)
+            startActivity<TeamDetailActivity>("item" to team)
+//            toast(it.teamName.toString())
         }
 
         teamRecyclerView.adapter = adapter
