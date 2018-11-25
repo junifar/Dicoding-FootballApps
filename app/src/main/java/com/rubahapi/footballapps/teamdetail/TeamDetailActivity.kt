@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.rubahapi.footballapps.R
-import com.rubahapi.footballapps.db.Favorite
 import com.rubahapi.footballapps.db.Teams
 import com.rubahapi.footballapps.db.database
 import com.rubahapi.footballapps.models.Team

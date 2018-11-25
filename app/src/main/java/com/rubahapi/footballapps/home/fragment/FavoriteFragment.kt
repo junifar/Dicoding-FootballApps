@@ -13,7 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rubahapi.footballapps.R
-import com.rubahapi.footballapps.home.fragment.favorite.FavoriteTeamsFragment
+import com.rubahapi.footballapps.home.fragment.favorite.favoriteteam.FavoriteTeamsFragment
 import com.rubahapi.footballapps.home.fragment.favorite.favoritematch.FavoriteMatchesFragment
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.coordinatorLayout
