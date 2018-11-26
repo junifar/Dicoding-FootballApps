@@ -14,12 +14,13 @@ import com.google.gson.Gson
 import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.api.ApiRepository
 import com.rubahapi.footballapps.models.Player
+import com.rubahapi.footballapps.playerdetail.PlayerDetailActivity
 import com.rubahapi.footballapps.util.invisible
 import com.rubahapi.footballapps.util.visible
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import org.jetbrains.anko.support.v4.toast
 
 class TeamDetailSquadFragment : Fragment(), AnkoComponent<Context>, TeamDetailSquadView {
 
@@ -56,7 +57,8 @@ class TeamDetailSquadFragment : Fragment(), AnkoComponent<Context>, TeamDetailSq
         }
 
         playerAdapter = PlayerAdapter(players){
-            toast(it.idPlayer.toString())
+//            toast(it.idPlayer.toString())
+            startActivity<PlayerDetailActivity>()
         }
 
         playerRecyclerView.adapter = playerAdapter
