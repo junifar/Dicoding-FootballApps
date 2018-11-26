@@ -8,4 +8,5 @@
     <item name="away_score" type="id"/>
     <item name="away_team" type="id"/>
     <item name="event_thumb" type="id"/>
+    <item name="team_description" type="id"/>
 </resources>
