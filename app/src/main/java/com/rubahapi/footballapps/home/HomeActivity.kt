@@ -21,6 +21,8 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val pageArray = arrayOf("match", "teams", "favorite")
 
+    val fm = supportFragmentManager
+
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_match -> {
@@ -49,8 +51,14 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextChange(query: String?): Boolean {
         when(page){
             pageArray[0]->
-                toast("1")
-            pageArray[0]->
+                        {
+                            val fragment = fm.findFragmentById(R.id.home_container) as MatchFragment
+                            if (query != null) {
+                                fragment.FilterList(query)
+                            }
+                            toast("1")
+                        }
+            pageArray[1]->
                 toast("2")
             else-> toast("0")
         }

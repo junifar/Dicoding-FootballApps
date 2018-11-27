@@ -26,6 +26,8 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
+import org.jetbrains.anko.support.v4.toast
+import java.util.*
 
 class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
 
@@ -134,6 +136,12 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
         swipeRefresh.isRefreshing = false
         nextMatches.clear()
         nextMatches.addAll(data)
+        nextMatchAdapter.notifyDataSetChanged()
+    }
+
+    fun FilterList(textFilter:String){
+        toast("13")
+        nextMatches.filter { it.homeTeam?.toLowerCase(Locale.ENGLISH)?.contains(textFilter)!! }
         nextMatchAdapter.notifyDataSetChanged()
     }
 

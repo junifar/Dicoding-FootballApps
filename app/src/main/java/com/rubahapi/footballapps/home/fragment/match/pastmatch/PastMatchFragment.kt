@@ -27,6 +27,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
+import org.jetbrains.anko.support.v4.toast
 
 class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
 
@@ -39,6 +40,7 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
     private lateinit var presenter: PastMatchPresenter
     private lateinit var pastMatchAdapter: PastMatchAdapter
     private var pastMatches: MutableList<Match> = mutableListOf()
+    lateinit var dataListMatch:List<Match>
 
     override fun createView(ui: AnkoContext<Context>):View{
         return setupUI(ui)
@@ -138,7 +140,19 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
         }
     }
 
+    fun FilterList(textFilter:String){
+        toast("14")
+//        var filterData:MutableList<Match> = pastMatches.filter { it.eventName?.toLowerCase(Locale.ENGLISH)?.contains(textFilter)!! }
+//        pastMatches.filter { it.eventName?.toLowerCase(Locale.ENGLISH)?.contains(textFilter)!! }
+        dataListMatch.filter { it.eventName == textFilter  }
+        pastMatches.clear()
+        pastMatches.addAll(dataListMatch)
+//        pastMatches = filterData
+        pastMatchAdapter.notifyDataSetChanged()
+    }
+
     override fun showPastMatch(data: List<Match>) {
+        dataListMatch = data
         swipeRefresh.isRefreshing = false
         pastMatches.clear()
         pastMatches.addAll(data)

@@ -29,6 +29,12 @@ class MatchFragment: Fragment(), AnkoComponent<Context>{
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
+    lateinit var nextMatchFragment: NextMatchFragment
+    lateinit var pastMatchFragment: PastMatchFragment
+
+    lateinit var page:String
+    val page_array = arrayOf("next", "past")
+
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
     }
@@ -55,6 +61,13 @@ class MatchFragment: Fragment(), AnkoComponent<Context>{
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(layoutTab))
         layoutTab.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
 
+        page = page_array[0]
+
+    }
+
+    fun FilterList(textFilter:String){
+        nextMatchFragment.FilterList(textFilter)
+        pastMatchFragment.FilterList(textFilter)
     }
 
     private fun setupUI(ui:AnkoContext<Context>) = with(ui){
@@ -108,8 +121,18 @@ class MatchFragment: Fragment(), AnkoComponent<Context>{
 
         override fun getItem(position: Int): Fragment {
             return when(position){
-                0-> NextMatchFragment.newInstance()
-                else -> PastMatchFragment.newInstance()
+                0-> {
+                    nextMatchFragment = NextMatchFragment()
+                    val args = Bundle()
+                    nextMatchFragment.arguments = args
+                    nextMatchFragment
+                }
+                else -> {
+                    pastMatchFragment = PastMatchFragment()
+                    val args = Bundle()
+                    pastMatchFragment.arguments = args
+                    pastMatchFragment
+                }
             }
         }
 

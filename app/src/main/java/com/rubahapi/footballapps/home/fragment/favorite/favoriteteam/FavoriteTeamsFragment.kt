@@ -24,7 +24,6 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import org.jetbrains.anko.support.v4.toast
 
 class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamView{
 
@@ -32,7 +31,6 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var teamRecyclerView: RecyclerView
     private lateinit var adapter: FavoriteTeamAdapter
-
     private var favoriteTeam:MutableList<Teams> = mutableListOf()
 
     override fun createView(ui: AnkoContext<Context>):View{
@@ -130,6 +128,10 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
 //                text = "Favorite Teams Fragment"
 //            }
 //        }
+    }
+
+    fun FilterList(textFilter:String){
+//        favoriteTeam.filter { it.teamName }
     }
 
     override fun showLoading() {

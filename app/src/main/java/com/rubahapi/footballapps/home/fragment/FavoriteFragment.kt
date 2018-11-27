@@ -13,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rubahapi.footballapps.R
-import com.rubahapi.footballapps.home.fragment.favorite.favoritematch.FavoriteMatchesFragment
 import com.rubahapi.footballapps.home.fragment.favorite.favoriteteam.FavoriteTeamsFragment
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.coordinatorLayout
@@ -33,7 +32,7 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
     lateinit var page:String
     val fm = childFragmentManager
     val page_array = arrayOf("match", "team")
-    lateinit var favoriteMatchesFragment:FavoriteMatchesFragment
+    lateinit var favoriteTeamsFragment:FavoriteTeamsFragment
 
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
@@ -114,7 +113,7 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
     fun FilterList(textFilter:String){
         when(page){
             page_array[0] -> {
-//                fm.findFragmentByTag()
+//                favoriteTeamsFragment.sea
             }
         }
     }
@@ -125,7 +124,10 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
             return when(position){
                 0-> {
                     page = page_array[0]
-                    FavoriteMatchesFragment.newInstance()
+                    favoriteTeamsFragment = FavoriteTeamsFragment()
+                    val args = Bundle()
+                    favoriteTeamsFragment.arguments = args
+                    return favoriteTeamsFragment
                 }
                 else -> {
                     page = page_array[1]
