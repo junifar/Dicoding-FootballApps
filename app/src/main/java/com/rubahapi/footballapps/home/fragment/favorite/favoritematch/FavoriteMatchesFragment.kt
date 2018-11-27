@@ -23,6 +23,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
+import java.util.*
 
 class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView {
 
@@ -64,10 +65,6 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
             favorites.clear()
             showFavorite()
         }
-//        swipeRefresh.onRefresh {
-//            favorites.clear()
-//            showFavorite()
-//        }
     }
 
     override fun showLoading() {
@@ -88,6 +85,11 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
             adapter.notifyDataSetChanged()
         }
         hideLoading()
+    }
+
+    fun FilterList(textFilter:String){
+        favorites.filter { it.homeTeam?.toLowerCase(Locale.ENGLISH)?.contains(textFilter)!! }
+        adapter.notifyDataSetChanged()
     }
 
     private fun setupUI(ui:AnkoContext<Context>) = with(ui){

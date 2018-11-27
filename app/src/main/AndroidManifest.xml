@@ -18,11 +18,18 @@
         </activity>
         <activity
                 android:name=".home.HomeActivity"
-                android:label="@string/title_activity_home"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:label="@string/title_activity_home">
+            <meta-data
+                    android:name="android.app.searchable"
+                    android:resource="@xml/searchable" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SEARCH" />
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>

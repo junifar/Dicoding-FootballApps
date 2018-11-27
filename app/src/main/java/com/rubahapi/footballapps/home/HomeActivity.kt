@@ -1,34 +1,74 @@
 package com.rubahapi.footballapps.home
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.SearchView
+import android.view.Menu
 import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.home.fragment.FavoriteFragment
 import com.rubahapi.footballapps.home.fragment.MatchFragment
 import com.rubahapi.footballapps.home.fragment.team.TeamFragment
 import kotlinx.android.synthetic.main.activity_home.*
+import org.jetbrains.anko.toast
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     var savedInstanceState: Bundle? = null
+    private lateinit var page:String
+
+    private val pageArray = arrayOf("match", "teams", "favorite")
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_match -> {
+                page = pageArray[0]
                 loadMatchFragment(savedInstanceState)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_teams -> {
+                page = pageArray[1]
                 loadTeamFragment(savedInstanceState)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_favorite -> {
+                page = pageArray[2]
                 loadFavoriteFragment(savedInstanceState)
                 return@OnNavigationItemSelectedListener true
             }
         }
         false
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        when(page){
+            pageArray[0]->
+                toast("1")
+            pageArray[0]->
+                toast("2")
+            else-> toast("0")
+        }
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_search, menu)
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu?.findItem(R.id.action_search)?.actionView as SearchView
+        searchView.setSearchableInfo(
+            searchManager
+                .getSearchableInfo(componentName)
+        )
+        searchView.maxWidth = Integer.MAX_VALUE
+
+        searchView.setOnQueryTextListener(this)
+        return true
     }
 
     private fun loadMatchFragment(savedInstanceState: Bundle?){
@@ -67,5 +107,7 @@ class HomeActivity : AppCompatActivity() {
         loadMatchFragment(savedInstanceState)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
+        page = pageArray[0]
     }
 }

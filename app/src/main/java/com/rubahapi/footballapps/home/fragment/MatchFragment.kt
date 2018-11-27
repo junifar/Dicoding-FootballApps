@@ -79,7 +79,7 @@ class MatchFragment: Fragment(), AnkoComponent<Context>{
                     )
                     title = "Football Apps"
                     setTitleTextColor(Color.WHITE)
-
+                    visibility = View.GONE
                 }.lparams{
                     weight = 1f
                 }

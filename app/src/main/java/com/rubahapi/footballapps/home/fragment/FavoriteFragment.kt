@@ -13,8 +13,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rubahapi.footballapps.R
-import com.rubahapi.footballapps.home.fragment.favorite.favoriteteam.FavoriteTeamsFragment
 import com.rubahapi.footballapps.home.fragment.favorite.favoritematch.FavoriteMatchesFragment
+import com.rubahapi.footballapps.home.fragment.favorite.favoriteteam.FavoriteTeamsFragment
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.tabLayout
@@ -29,6 +29,11 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
     lateinit var layoutTab: TabLayout
     lateinit var appBarLayout: AppBarLayout
     lateinit var viewPager: ViewPager
+
+    lateinit var page:String
+    val fm = childFragmentManager
+    val page_array = arrayOf("match", "team")
+    lateinit var favoriteMatchesFragment:FavoriteMatchesFragment
 
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
@@ -45,6 +50,8 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
 
         val tabTeams = layoutTab.newTab()
         tabTeams.text = "Teams"
+
+        page = page_array[0]
 
         mSectionsPagerAdapter = SectionsPagerAdapter(childFragmentManager)
 
@@ -78,6 +85,7 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
                     )
                     title = "Football Apps"
                     setTitleTextColor(Color.WHITE)
+                    visibility = View.GONE
 
                 }.lparams{
                     weight = 1f
@@ -103,12 +111,26 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
         }
     }
 
+    fun FilterList(textFilter:String){
+        when(page){
+            page_array[0] -> {
+//                fm.findFragmentByTag()
+            }
+        }
+    }
+
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
             return when(position){
-                0-> FavoriteMatchesFragment.newInstance()
-                else -> FavoriteTeamsFragment.newInstance()
+                0-> {
+                    page = page_array[0]
+                    FavoriteMatchesFragment.newInstance()
+                }
+                else -> {
+                    page = page_array[1]
+                    FavoriteTeamsFragment.newInstance()
+                }
             }
         }
 
