@@ -58,7 +58,7 @@ class TeamDetailSquadFragment : Fragment(), AnkoComponent<Context>, TeamDetailSq
 
         playerAdapter = PlayerAdapter(players){
 //            toast(it.idPlayer.toString())
-            startActivity<PlayerDetailActivity>()
+            startActivity<PlayerDetailActivity>("item" to it)
         }
 
         playerRecyclerView.adapter = playerAdapter

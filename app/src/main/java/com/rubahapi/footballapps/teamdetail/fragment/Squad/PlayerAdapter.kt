@@ -10,7 +10,6 @@ import android.widget.TextView
 import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.R.id.event_name
 import com.rubahapi.footballapps.models.Player
-import com.rubahapi.footballapps.models.Team
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
@@ -86,7 +85,7 @@ class TeamViewHolder(view: View): RecyclerView.ViewHolder(view) {
 //        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 //        val date = dateFormat.parse(teamLeague.eventDate)
         eventName.text = teamPlayer.strPlayer
-        Picasso.get().load(teamPlayer.strThumb).fit().into(eventThumb)
+        Picasso.get().load(teamPlayer.strCutout).fit().into(eventThumb)
 //        eventDate.text = toSimpleString(date)
 
         itemView.setOnClickListener { listener(teamPlayer) }
