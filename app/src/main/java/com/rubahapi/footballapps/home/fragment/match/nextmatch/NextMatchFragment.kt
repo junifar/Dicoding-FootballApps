@@ -26,8 +26,6 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import org.jetbrains.anko.support.v4.toast
-import java.util.*
 
 class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
 
@@ -40,6 +38,7 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
     private lateinit var presenter: NextMatchPresenter
     private lateinit var nextMatchAdapter: NextMatchAdapter
     private var nextMatches: MutableList<Match> = mutableListOf()
+    lateinit var dataListMatch:List<Match>
 
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
@@ -134,14 +133,16 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
 
     override fun showNextMatch(data: List<Match>) {
         swipeRefresh.isRefreshing = false
+        dataListMatch = data
         nextMatches.clear()
         nextMatches.addAll(data)
         nextMatchAdapter.notifyDataSetChanged()
     }
 
     fun FilterList(textFilter:String){
-        toast("13")
-        nextMatches.filter { it.homeTeam?.toLowerCase(Locale.ENGLISH)?.contains(textFilter)!! }
+        val dataFilter = dataListMatch.filter { it.eventName?.contains(textFilter, true)?:false }
+        nextMatches.clear()
+        nextMatches.addAll(dataFilter)
         nextMatchAdapter.notifyDataSetChanged()
     }
 

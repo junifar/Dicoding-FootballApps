@@ -102,6 +102,7 @@ class NextMatchDetailActivity: AppCompatActivity(), NextMatchView{
             database.use {
                 insert(Favorite.TABLE_FAVORITE,
                     Favorite.eventID to item.eventID,
+                    Favorite.eventName to item.eventName,
                     Favorite.homeTeam to item.homeTeam,
                     Favorite.awayTeam to item.awayTeam,
                     Favorite.homeScore to item.homeScore,

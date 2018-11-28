@@ -4,7 +4,6 @@ import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.provider.SyncStateContract.Helpers.insert
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
@@ -16,24 +15,22 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import com.google.gson.Gson
-import com.rubahapi.footballapps.api.ApiRepository
-import com.rubahapi.footballapps.models.Match
-import com.rubahapi.footballapps.models.Team
-import com.rubahapi.footballapps.R.menu.match_detail_menu
 import com.rubahapi.footballapps.R.drawable.ic_add_to_favorites
 import com.rubahapi.footballapps.R.drawable.ic_added_to_favorites
 import com.rubahapi.footballapps.R.id.add_to_favorite
+import com.rubahapi.footballapps.R.menu.match_detail_menu
+import com.rubahapi.footballapps.api.ApiRepository
 import com.rubahapi.footballapps.db.Favorite
 import com.rubahapi.footballapps.db.database
+import com.rubahapi.footballapps.models.Match
+import com.rubahapi.footballapps.models.Team
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.selects.select
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
-import java.nio.file.Files.delete
 
 class PastMatchDetailActivity: AppCompatActivity(), PastMatchView{
 
@@ -139,6 +136,7 @@ class PastMatchDetailActivity: AppCompatActivity(), PastMatchView{
             database.use {
                 insert(Favorite.TABLE_FAVORITE,
                     Favorite.eventID to item.eventID,
+                    Favorite.eventName to item.eventName,
                     Favorite.homeTeam to item.homeTeam,
                     Favorite.awayTeam to item.awayTeam,
                     Favorite.homeScore to item.homeScore,

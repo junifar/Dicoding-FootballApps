@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Favorite(val id: Long?,
+                    val eventName: String? = null,
                     val eventID: String? = null,
                     val homeTeam: String? = null,
                     val awayTeam: String? = null,
@@ -32,6 +33,7 @@ data class Favorite(val id: Long?,
     companion object {
         const val TABLE_FAVORITE   = "TABLE_FAVORITE"
         const val ID               = "ID_"
+        const val eventName        = "EVENT_NAME"
         const val eventID          = "EVENT_ID"
         const val homeTeam         = "HOME_TEAM"
         const val awayTeam         = "AWAY_TEAM"

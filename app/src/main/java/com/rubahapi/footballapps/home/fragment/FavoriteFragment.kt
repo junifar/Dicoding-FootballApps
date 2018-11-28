@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rubahapi.footballapps.R
+import com.rubahapi.footballapps.home.fragment.favorite.favoritematch.FavoriteMatchesFragment
 import com.rubahapi.footballapps.home.fragment.favorite.favoriteteam.FavoriteTeamsFragment
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.coordinatorLayout
@@ -29,10 +30,8 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
     lateinit var appBarLayout: AppBarLayout
     lateinit var viewPager: ViewPager
 
-    lateinit var page:String
-    val fm = childFragmentManager
-    val page_array = arrayOf("match", "team")
     lateinit var favoriteTeamsFragment:FavoriteTeamsFragment
+    lateinit var favoriteMatchFragment:FavoriteMatchesFragment
 
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
@@ -49,8 +48,6 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
 
         val tabTeams = layoutTab.newTab()
         tabTeams.text = "Teams"
-
-        page = page_array[0]
 
         mSectionsPagerAdapter = SectionsPagerAdapter(childFragmentManager)
 
@@ -111,11 +108,7 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
     }
 
     fun FilterList(textFilter:String){
-        when(page){
-            page_array[0] -> {
-//                favoriteTeamsFragment.sea
-            }
-        }
+        favoriteMatchFragment.FilterList(textFilter)
     }
 
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
@@ -123,15 +116,16 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
         override fun getItem(position: Int): Fragment {
             return when(position){
                 0-> {
-                    page = page_array[0]
+                    favoriteMatchFragment = FavoriteMatchesFragment()
+                    val args = Bundle()
+                    favoriteMatchFragment.arguments = args
+                    favoriteMatchFragment
+                }
+                else -> {
                     favoriteTeamsFragment = FavoriteTeamsFragment()
                     val args = Bundle()
                     favoriteTeamsFragment.arguments = args
-                    return favoriteTeamsFragment
-                }
-                else -> {
-                    page = page_array[1]
-                    FavoriteTeamsFragment.newInstance()
+                    favoriteTeamsFragment
                 }
             }
         }

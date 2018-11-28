@@ -23,7 +23,6 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import java.util.*
 
 class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView {
 
@@ -33,6 +32,7 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
     private lateinit var adapter: FavoriteAdapter
 
     private var favorites:MutableList<Favorite> = mutableListOf()
+    lateinit var dataListMatch:List<Favorite>
 
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
@@ -81,6 +81,7 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
             swipeRefresh.isRefreshing = false
             val result = select(Favorite.TABLE_FAVORITE)
             val favorite = result.parseList(classParser<Favorite>())
+            dataListMatch = favorite
             favorites.addAll(favorite)
             adapter.notifyDataSetChanged()
         }
@@ -88,7 +89,9 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
     }
 
     fun FilterList(textFilter:String){
-        favorites.filter { it.homeTeam?.toLowerCase(Locale.ENGLISH)?.contains(textFilter)!! }
+        val dataFilter = dataListMatch.filter { it.eventName?.contains(textFilter, true)?:false }
+        favorites.clear()
+        favorites.addAll(dataFilter)
         adapter.notifyDataSetChanged()
     }
 

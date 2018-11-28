@@ -43,6 +43,7 @@ class TeamFragment:Fragment(), AnkoComponent<Context>, TeamView {
 
     private lateinit var presenter: TeamPresenter
     private var teamLeague: MutableList<Team> = mutableListOf()
+    private lateinit var teamData:List<Team>
 
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
@@ -96,9 +97,17 @@ class TeamFragment:Fragment(), AnkoComponent<Context>, TeamView {
     }
 
     override fun showTeamLeague(data: List<Team>) {
+        teamData = data
         swipeRefresh.isRefreshing = false
         teamLeague.clear()
         teamLeague.addAll(data)
+        teamLeagueAdapter.notifyDataSetChanged()
+    }
+
+    fun FilterList(textFilter:String){
+        val dataFilter = teamData.filter { it.teamName?.contains(textFilter, true)?:false }
+        teamLeague.clear()
+        teamLeague.addAll(dataFilter)
         teamLeagueAdapter.notifyDataSetChanged()
     }
 

@@ -12,7 +12,6 @@ import com.rubahapi.footballapps.home.fragment.FavoriteFragment
 import com.rubahapi.footballapps.home.fragment.MatchFragment
 import com.rubahapi.footballapps.home.fragment.team.TeamFragment
 import kotlinx.android.synthetic.main.activity_home.*
-import org.jetbrains.anko.toast
 
 class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
@@ -53,14 +52,21 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             pageArray[0]->
                         {
                             val fragment = fm.findFragmentById(R.id.home_container) as MatchFragment
-                            if (query != null) {
+                            if (query != null)
                                 fragment.FilterList(query)
-                            }
-                            toast("1")
+
                         }
             pageArray[1]->
-                toast("2")
-            else-> toast("0")
+                        {
+                            val fragment = fm.findFragmentById(R.id.home_container) as TeamFragment
+                            if (query!=null)
+                                fragment.FilterList(query)
+                        }
+            else-> {
+                    val fragment = fm.findFragmentById(R.id.home_container) as FavoriteFragment
+                    if (query!=null)
+                            fragment.FilterList(query)
+                }
         }
         return true
     }

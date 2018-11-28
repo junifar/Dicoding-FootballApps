@@ -27,7 +27,6 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import org.jetbrains.anko.support.v4.toast
 
 class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
 
@@ -141,13 +140,9 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
     }
 
     fun FilterList(textFilter:String){
-        toast("14")
-//        var filterData:MutableList<Match> = pastMatches.filter { it.eventName?.toLowerCase(Locale.ENGLISH)?.contains(textFilter)!! }
-//        pastMatches.filter { it.eventName?.toLowerCase(Locale.ENGLISH)?.contains(textFilter)!! }
-        dataListMatch.filter { it.eventName == textFilter  }
+        val dataFilter = dataListMatch.filter { it.eventName?.contains(textFilter, true)?:false }
         pastMatches.clear()
-        pastMatches.addAll(dataListMatch)
-//        pastMatches = filterData
+        pastMatches.addAll(dataFilter)
         pastMatchAdapter.notifyDataSetChanged()
     }
 

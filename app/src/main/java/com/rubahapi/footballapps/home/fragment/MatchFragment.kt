@@ -32,9 +32,6 @@ class MatchFragment: Fragment(), AnkoComponent<Context>{
     lateinit var nextMatchFragment: NextMatchFragment
     lateinit var pastMatchFragment: PastMatchFragment
 
-    lateinit var page:String
-    val page_array = arrayOf("next", "past")
-
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
     }
@@ -61,7 +58,6 @@ class MatchFragment: Fragment(), AnkoComponent<Context>{
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(layoutTab))
         layoutTab.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
 
-        page = page_array[0]
 
     }
 
