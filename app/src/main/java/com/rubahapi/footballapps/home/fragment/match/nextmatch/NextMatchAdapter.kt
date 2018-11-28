@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.rubahapi.footballapps.R
+import com.rubahapi.footballapps.R.id.*
 import com.rubahapi.footballapps.models.Match
 import com.rubahapi.footballapps.util.toSimpleString
-import com.rubahapi.footballapps.R.id.event_date
-import com.rubahapi.footballapps.R.id.event_name
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 import java.text.SimpleDateFormat
@@ -66,6 +65,17 @@ class NextMatchesUI : AnkoComponent<ViewGroup>{
                         padding = dip(0)
                     }
 
+                    textView{
+                        id = R.id.event_time
+                        textSize = 16f
+                        textAlignment = View.TEXT_ALIGNMENT_CENTER
+                    }.lparams{
+                        margin = dip(5)
+                        width = matchParent
+                        height = wrapContent
+                        padding= dip(0)
+                    }
+
                     textView {
                         id = R.id.event_name
                         textSize = 16f
@@ -93,12 +103,14 @@ class NextMatchesUI : AnkoComponent<ViewGroup>{
 class NextMatchViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val eventName: TextView = view.find(event_name)
     private val eventDate: TextView = view.find(event_date)
+    private val eventTime: TextView = view.find(event_time)
 
     fun bindItem(match: Match, listener: (Match)-> Unit){
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         val date = dateFormat.parse(match.eventDate)
         eventName.text = match.eventName
         eventDate.text = toSimpleString(date)
+        eventTime.text = match.strTime
 
         itemView.setOnClickListener { listener(match) }
     }

@@ -28,7 +28,8 @@ data class Favorite(val id: Long?,
                     val homeGoalDetails: String? = null,
                     val awayGoalDetails: String? = null,
                     val idHome: String? = null,
-                    val idAway: String? = null
+                    val idAway: String? = null,
+                    val strTime:String? = null
                     ) : Parcelable {
     companion object {
         const val TABLE_FAVORITE   = "TABLE_FAVORITE"
@@ -57,5 +58,6 @@ data class Favorite(val id: Long?,
         const val awayGoalDetails  = "AWAY_GOAL_DETAIL"
         const val idHome           = "ID_HOME"
         const val idAway           = "ID_AWAY"
+        const val strTime          = "TIME_EVENT"
     }
 }

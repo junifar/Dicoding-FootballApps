@@ -89,7 +89,8 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
                 Favorite.homeSubstitute, Favorite.awaySubstitute,
                 Favorite.homeGoalDetails, Favorite.awayGoalDetails,
                 Favorite.idHome,
-                Favorite.idAway)
+                Favorite.idAway,
+                Favorite.strTime)
             val favorite = result.parseList(classParser<Favorite>())
             dataListMatch = favorite
             favorites.addAll(favorite)

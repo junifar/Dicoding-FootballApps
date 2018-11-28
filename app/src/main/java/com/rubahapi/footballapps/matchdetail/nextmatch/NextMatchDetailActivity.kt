@@ -124,7 +124,8 @@ class NextMatchDetailActivity: AppCompatActivity(), NextMatchView{
                     Favorite.homeGoalDetails to item.homeGoalDetails,
                     Favorite.awayGoalDetails to item.awayGoalDetails,
                     Favorite.idHome to item.idHome,
-                    Favorite.idAway to item.idAway)
+                    Favorite.idAway to item.idAway,
+                    Favorite.strTime to item.strTime)
             }
             snackbar(scrollView, "Added to favorite").show()
         } catch (e: SQLiteConstraintException){

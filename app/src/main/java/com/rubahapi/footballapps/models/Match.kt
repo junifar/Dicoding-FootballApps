@@ -53,5 +53,7 @@ data class Match(
     @SerializedName("strHomeGoalDetails")
     val homeGoalDetails: String? = null,
     @SerializedName("strAwayGoalDetails")
-    val awayGoalDetails: String? = null
+    val awayGoalDetails: String? = null,
+    @SerializedName("strTime")
+    val strTime:String? = null
 ) : Parcelable
