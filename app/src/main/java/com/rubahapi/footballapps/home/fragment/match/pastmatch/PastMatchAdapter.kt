@@ -13,9 +13,11 @@ import com.rubahapi.footballapps.models.Match
 import com.rubahapi.footballapps.util.toSimpleString
 import com.rubahapi.footballapps.R.id.event_date
 import com.rubahapi.footballapps.R.id.event_name
+import com.rubahapi.footballapps.util.toSimpleTimeString
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 import java.text.SimpleDateFormat
+import java.util.*
 
 class PastMatchAdapter(private val items: List<Match>,
                        private val listener: (Match) -> Unit): RecyclerView.Adapter<NextMatchViewHolder>(){
@@ -66,6 +68,17 @@ class NextMatchesUI : AnkoComponent<ViewGroup>{
                         padding = dip(0)
                     }
 
+                    textView{
+                        id = R.id.event_time
+                        textSize = 16f
+                        textAlignment = View.TEXT_ALIGNMENT_CENTER
+                    }.lparams{
+                        margin = dip(5)
+                        width = matchParent
+                        height = wrapContent
+                        padding= dip(0)
+                    }
+
                     textView {
                         id = R.id.event_name
                         textSize = 16f
@@ -93,12 +106,18 @@ class NextMatchesUI : AnkoComponent<ViewGroup>{
 class NextMatchViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val eventName: TextView = view.find(event_name)
     private val eventDate: TextView = view.find(event_date)
+    private val eventTime: TextView = view.find(R.id.event_time)
 
     fun bindItem(match: Match, listener: (Match)-> Unit){
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         val date = dateFormat.parse(match.eventDate)
+        val timeFormat = SimpleDateFormat("HH:mm:ssXXX")
+        timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
+        val timeDate = timeFormat.parse(match.strTime)
+
         eventName.text = match.eventName
         eventDate.text = toSimpleString(date)
+        eventTime.text = toSimpleTimeString(timeDate)
 
         itemView.setOnClickListener { listener(match) }
     }

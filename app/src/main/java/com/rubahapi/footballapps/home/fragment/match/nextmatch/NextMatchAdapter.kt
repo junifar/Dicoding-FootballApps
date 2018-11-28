@@ -11,9 +11,11 @@ import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.R.id.*
 import com.rubahapi.footballapps.models.Match
 import com.rubahapi.footballapps.util.toSimpleString
+import com.rubahapi.footballapps.util.toSimpleTimeString
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 import java.text.SimpleDateFormat
+import java.util.*
 
 class NextMatchAdapter(private val items: List<Match>,
                        private val listener: (Match) -> Unit): RecyclerView.Adapter<NextMatchViewHolder>(){
@@ -108,9 +110,14 @@ class NextMatchViewHolder(view: View): RecyclerView.ViewHolder(view) {
     fun bindItem(match: Match, listener: (Match)-> Unit){
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         val date = dateFormat.parse(match.eventDate)
+
+        val timeFormat = SimpleDateFormat("HH:mm:ssXXX")
+        timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
+        val timeDate = timeFormat.parse(match.strTime)
+
         eventName.text = match.eventName
         eventDate.text = toSimpleString(date)
-        eventTime.text = match.strTime
+        eventTime.text = toSimpleTimeString(timeDate)
 
         itemView.setOnClickListener { listener(match) }
     }

@@ -12,8 +12,10 @@ import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.R.id.event_date
 import com.rubahapi.footballapps.db.Favorite
 import com.rubahapi.footballapps.util.toSimpleString
+import com.rubahapi.footballapps.util.toSimpleTimeString
 import org.jetbrains.anko.*
 import java.text.SimpleDateFormat
+import java.util.*
 
 class FavoriteAdapter(private val items: List<Favorite>,
                       private val listener: (Favorite) -> Unit): RecyclerView.Adapter<FavoriteViewHolder>(){
@@ -50,6 +52,17 @@ class FavoriteUI: AnkoComponent<ViewGroup>{
                     margin = dip(5)
                     width = matchParent
                     height = wrapContent
+                }
+
+                textView{
+                    id = R.id.event_time
+                    textSize = 16f
+                    textAlignment = View.TEXT_ALIGNMENT_CENTER
+                }.lparams{
+                    margin = dip(5)
+                    width = matchParent
+                    height = wrapContent
+                    padding= dip(0)
                 }
 
                 linearLayout {
@@ -102,16 +115,23 @@ class FavoriteViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val homeScore: TextView = view.find(R.id.home_score)
     private val awayScore: TextView = view.find(R.id.away_score)
     private val eventDate: TextView = view.find(event_date)
+    private val eventTime: TextView = view.find(R.id.event_time)
 
     fun bindItem(favorite: Favorite, listener: (Favorite) -> Unit) {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         val date = dateFormat.parse(favorite.eventDate)
+
+        val timeFormat = SimpleDateFormat("HH:mm:ssXXX")
+        timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
+        val timeDate = timeFormat.parse(favorite.strTime)
+
         homeTeam.text = favorite.homeTeam
         awayTeam.text = favorite.awayTeam
         homeScore.text = favorite.homeScore ?: "0"
         awayScore.text = favorite.awayScore ?: "0"
 //        eventDate.text = favorite.eventDate
         eventDate.text = toSimpleString(date)
+        eventTime.text = toSimpleTimeString(timeDate)
         itemView.setOnClickListener { listener(favorite) }
     }
 }

@@ -186,7 +186,6 @@ class FavoriteDetailMatchActivity: AppCompatActivity(), FavoriteDetailMatchView{
             imgUrl = it.teamBadge.toString()
             teamName = it.teamName.toString()
         }
-        toast(imgUrl)
         Picasso.get().load(imgUrl).fit().into(imageAwayMatch)
         teamAwayName.text = teamName
     }
