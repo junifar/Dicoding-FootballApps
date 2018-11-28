@@ -32,6 +32,7 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
     private lateinit var teamRecyclerView: RecyclerView
     private lateinit var adapter: FavoriteTeamAdapter
     private var favoriteTeam:MutableList<Teams> = mutableListOf()
+    lateinit var dataListTeam:List<Teams>
 
     override fun createView(ui: AnkoContext<Context>):View{
         return setupUI(ui)
@@ -58,6 +59,7 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
             swipeRefresh.isRefreshing = false
             val result = select(Teams.TABLE_TEAM)
             val favorite = result.parseList(classParser<Teams>())
+            dataListTeam = favorite
             favoriteTeam.addAll(favorite)
             adapter.notifyDataSetChanged()
         }
@@ -131,7 +133,10 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
     }
 
     fun FilterList(textFilter:String){
-//        favoriteTeam.filter { it.teamName }
+        val dataFilter = dataListTeam.filter { it.teamName?.contains(textFilter, true)?:false }
+        favoriteTeam.clear()
+        favoriteTeam.addAll(dataFilter)
+        adapter.notifyDataSetChanged()
     }
 
     override fun showLoading() {

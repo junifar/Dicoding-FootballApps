@@ -79,7 +79,17 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
         showLoading()
         context?.database?.use {
             swipeRefresh.isRefreshing = false
-            val result = select(Favorite.TABLE_FAVORITE)
+            val result = select(Favorite.TABLE_FAVORITE).columns(Favorite.ID, Favorite.eventName,
+                Favorite.eventID, Favorite.homeTeam, Favorite.awayTeam, Favorite.homeScore,
+                Favorite.awayScore, Favorite.homeShoot, Favorite.awayShoot, Favorite.eventDate,
+                Favorite.eventThumb, Favorite.homeGoalKeeper, Favorite.awayGoalKeeper,
+                Favorite.homeDefense, Favorite.awayDefense,
+                Favorite.homeMidField, Favorite.awayMidField,
+                Favorite.homeForward, Favorite.awayForward,
+                Favorite.homeSubstitute, Favorite.awaySubstitute,
+                Favorite.homeGoalDetails, Favorite.awayGoalDetails,
+                Favorite.idHome,
+                Favorite.idAway)
             val favorite = result.parseList(classParser<Favorite>())
             dataListMatch = favorite
             favorites.addAll(favorite)

@@ -109,6 +109,7 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
 
     fun FilterList(textFilter:String){
         favoriteMatchFragment.FilterList(textFilter)
+        favoriteTeamsFragment.FilterList(textFilter)
     }
 
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
