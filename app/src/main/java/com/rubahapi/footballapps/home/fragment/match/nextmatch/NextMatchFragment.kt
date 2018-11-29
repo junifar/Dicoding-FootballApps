@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Spinner
 import com.google.gson.Gson
+import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.R.color.colorAccent
 import com.rubahapi.footballapps.api.ApiRepository
 import com.rubahapi.footballapps.matchdetail.nextmatch.NextMatchDetailActivity
@@ -80,7 +81,9 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
                 height = matchParent
             }
 
-            spinner = spinner()
+            spinner = spinner{
+                id = R.id.spinner
+            }
 
             swipeRefresh = swipeRefreshLayout {
                 setColorSchemeResources(colorAccent,

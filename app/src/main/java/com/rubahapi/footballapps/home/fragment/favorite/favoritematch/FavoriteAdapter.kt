@@ -14,6 +14,7 @@ import com.rubahapi.footballapps.db.Favorite
 import com.rubahapi.footballapps.util.toSimpleString
 import com.rubahapi.footballapps.util.toSimpleTimeString
 import org.jetbrains.anko.*
+import org.jetbrains.anko.cardview.v7.cardView
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,71 +36,82 @@ class FavoriteAdapter(private val items: List<Favorite>,
 class FavoriteUI: AnkoComponent<ViewGroup>{
     override fun createView(ui: AnkoContext<ViewGroup>): View {
         return with(ui){
-            linearLayout {
-                lparams(
-                    width = matchParent,
-                    height = wrapContent
-                )
-                orientation = LinearLayout.VERTICAL
-
-                textView {
-                    id = event_date
-                    textSize = 14f
-                    textColor = Color.GREEN
-                    setTypeface(null, Typeface.BOLD)
-                    textAlignment = View.TEXT_ALIGNMENT_CENTER
-                }.lparams{
-                    margin = dip(5)
+            cardView {
+                padding = dip(5)
+                cardElevation = dip(6).toFloat()
+                radius = dip(5).toFloat()
+                useCompatPadding = true
+                lparams {
                     width = matchParent
                     height = wrapContent
+                    radius = dip(4f).toFloat()
                 }
-
-                textView{
-                    id = R.id.event_time
-                    textSize = 16f
-                    textAlignment = View.TEXT_ALIGNMENT_CENTER
-                }.lparams{
-                    margin = dip(5)
-                    width = matchParent
-                    height = wrapContent
-                    padding= dip(0)
-                }
-
                 linearLayout {
                     lparams(
                         width = matchParent,
                         height = wrapContent
                     )
-                    orientation = LinearLayout.HORIZONTAL
-                    gravity = Gravity.CENTER
+                    orientation = LinearLayout.VERTICAL
 
                     textView {
-                        id = R.id.home_team
-                        textSize = 16f
-                    }.lparams{
-                        margin = dip(15)
+                        id = event_date
+                        textSize = 14f
+                        textColor = Color.GREEN
+                        setTypeface(null, Typeface.BOLD)
+                        textAlignment = View.TEXT_ALIGNMENT_CENTER
+                    }.lparams {
+                        margin = dip(5)
+                        width = matchParent
+                        height = wrapContent
                     }
+
                     textView {
-                        id = R.id.home_score
+                        id = R.id.event_time
                         textSize = 16f
-                    }.lparams{
-                        margin = dip(15)
+                        textAlignment = View.TEXT_ALIGNMENT_CENTER
+                    }.lparams {
+                        margin = dip(5)
+                        width = matchParent
+                        height = wrapContent
+                        padding = dip(0)
                     }
-                    textView {
-                        text = "VS"
-                        textSize = 16f
-                    }
-                    textView {
-                        id = R.id.away_score
-                        textSize = 16f
-                    }.lparams{
-                        margin = dip(15)
-                    }
-                    textView {
-                        id = R.id.away_team
-                        textSize = 16f
-                    }.lparams{
-                        margin = dip(15)
+
+                    linearLayout {
+                        lparams(
+                            width = matchParent,
+                            height = wrapContent
+                        )
+                        orientation = LinearLayout.HORIZONTAL
+                        gravity = Gravity.CENTER
+
+                        textView {
+                            id = R.id.home_team
+                            textSize = 16f
+                        }.lparams {
+                            margin = dip(15)
+                        }
+                        textView {
+                            id = R.id.home_score
+                            textSize = 16f
+                        }.lparams {
+                            margin = dip(15)
+                        }
+                        textView {
+                            text = "VS"
+                            textSize = 16f
+                        }
+                        textView {
+                            id = R.id.away_score
+                            textSize = 16f
+                        }.lparams {
+                            margin = dip(15)
+                        }
+                        textView {
+                            id = R.id.away_team
+                            textSize = 16f
+                        }.lparams {
+                            margin = dip(15)
+                        }
                     }
                 }
             }

@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.test.espresso.idling.CountingIdlingResource
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import android.view.Menu
@@ -21,6 +22,8 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private val pageArray = arrayOf("match", "teams", "favorite")
 
     val fm = supportFragmentManager
+
+    val idlingResource = CountingIdlingResource("DATA_LOADER")
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
