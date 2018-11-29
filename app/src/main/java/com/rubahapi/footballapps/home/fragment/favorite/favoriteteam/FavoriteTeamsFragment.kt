@@ -69,7 +69,7 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
     private fun callConfiguration() {
         adapter = FavoriteTeamAdapter(favoriteTeam){
 //            startActivity<FavoriteDetailMatchActivity>("id" to it.eventID)
-            var team:Team = Team(it.teamID, it.teamName, it.teamBadge, it.intFormedYear?.toInt(), it.strStadium, it.strDescription)
+            val team:Team = Team(it.teamID, it.teamName, it.teamBadge, it.intFormedYear?.toInt(), it.strStadium, it.strDescription)
             startActivity<TeamDetailActivity>("item" to team)
 //            toast(it.teamName.toString())
         }

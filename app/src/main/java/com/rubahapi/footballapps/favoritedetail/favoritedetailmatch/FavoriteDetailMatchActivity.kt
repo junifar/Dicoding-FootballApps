@@ -58,7 +58,18 @@ class FavoriteDetailMatchActivity: AppCompatActivity(), FavoriteDetailMatchView{
 
     private fun setupAction(){
         database.use {
-            val result = select(Favorite.TABLE_FAVORITE)
+            val result = select(Favorite.TABLE_FAVORITE).columns(Favorite.ID, Favorite.eventName,
+                Favorite.eventID, Favorite.homeTeam, Favorite.awayTeam, Favorite.homeScore,
+                Favorite.awayScore, Favorite.homeShoot, Favorite.awayShoot, Favorite.eventDate,
+                Favorite.eventThumb, Favorite.homeGoalKeeper, Favorite.awayGoalKeeper,
+                Favorite.homeDefense, Favorite.awayDefense,
+                Favorite.homeMidField, Favorite.awayMidField,
+                Favorite.homeForward, Favorite.awayForward,
+                Favorite.homeSubstitute, Favorite.awaySubstitute,
+                Favorite.homeGoalDetails, Favorite.awayGoalDetails,
+                Favorite.idHome,
+                Favorite.idAway,
+                Favorite.strTime)
                 .whereArgs("(EVENT_ID = {id})",
                     "id" to eventID
                 )
@@ -80,7 +91,18 @@ class FavoriteDetailMatchActivity: AppCompatActivity(), FavoriteDetailMatchView{
 
     private fun favoriteState(){
         database.use {
-            val result = select(Favorite.TABLE_FAVORITE)
+            val result = select(Favorite.TABLE_FAVORITE).columns(Favorite.ID, Favorite.eventName,
+                Favorite.eventID, Favorite.homeTeam, Favorite.awayTeam, Favorite.homeScore,
+                Favorite.awayScore, Favorite.homeShoot, Favorite.awayShoot, Favorite.eventDate,
+                Favorite.eventThumb, Favorite.homeGoalKeeper, Favorite.awayGoalKeeper,
+                Favorite.homeDefense, Favorite.awayDefense,
+                Favorite.homeMidField, Favorite.awayMidField,
+                Favorite.homeForward, Favorite.awayForward,
+                Favorite.homeSubstitute, Favorite.awaySubstitute,
+                Favorite.homeGoalDetails, Favorite.awayGoalDetails,
+                Favorite.idHome,
+                Favorite.idAway,
+                Favorite.strTime)
                 .whereArgs("(EVENT_ID = {id})",
                     "id" to id
                 )
