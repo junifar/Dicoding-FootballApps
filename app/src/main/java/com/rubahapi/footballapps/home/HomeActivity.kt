@@ -4,7 +4,6 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.test.espresso.idling.CountingIdlingResource
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import android.view.Menu
@@ -21,9 +20,7 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val pageArray = arrayOf("match", "teams", "favorite")
 
-    val fm = supportFragmentManager
-
-    val idlingResource = CountingIdlingResource("DATA_LOADER")
+    private val fm = supportFragmentManager
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -56,19 +53,19 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                         {
                             val fragment = fm.findFragmentById(R.id.home_container) as MatchFragment
                             if (query != null)
-                                fragment.FilterList(query)
+                                fragment.filterList(query)
 
                         }
             pageArray[1]->
                         {
                             val fragment = fm.findFragmentById(R.id.home_container) as TeamFragment
                             if (query!=null)
-                                fragment.FilterList(query)
+                                fragment.filterList(query)
                         }
             else-> {
                     val fragment = fm.findFragmentById(R.id.home_container) as FavoriteFragment
                     if (query!=null)
-                            fragment.FilterList(query)
+                            fragment.filterList(query)
                 }
         }
         return true

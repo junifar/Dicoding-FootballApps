@@ -10,7 +10,6 @@ import android.widget.TextView
 import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.R.id.event_name
 import com.rubahapi.footballapps.db.Teams
-import com.rubahapi.footballapps.models.Team
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView

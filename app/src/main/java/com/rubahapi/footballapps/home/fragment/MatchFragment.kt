@@ -23,9 +23,9 @@ import org.jetbrains.anko.support.v4.viewPager
 
 class MatchFragment: Fragment(), AnkoComponent<Context>{
 
-    lateinit var layoutTab: TabLayout
-    lateinit var appBarLayout: AppBarLayout
-    lateinit var viewPager: ViewPager
+    private lateinit var layoutTab: TabLayout
+    private lateinit var appBarLayout: AppBarLayout
+    private lateinit var viewPager: ViewPager
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
@@ -61,9 +61,9 @@ class MatchFragment: Fragment(), AnkoComponent<Context>{
 
     }
 
-    fun FilterList(textFilter:String){
-        nextMatchFragment.FilterList(textFilter)
-        pastMatchFragment.FilterList(textFilter)
+    fun filterList(textFilter:String){
+        nextMatchFragment.filterList(textFilter)
+        pastMatchFragment.filterList(textFilter)
     }
 
     private fun setupUI(ui:AnkoContext<Context>) = with(ui){

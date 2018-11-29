@@ -32,7 +32,7 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
     private lateinit var adapter: FavoriteAdapter
 
     private var favorites:MutableList<Favorite> = mutableListOf()
-    lateinit var dataListMatch:List<Favorite>
+    private lateinit var dataListMatch:List<Favorite>
 
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
@@ -106,7 +106,7 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
         hideLoading()
     }
 
-    fun FilterList(textFilter:String){
+    fun filterList(textFilter:String){
         val dataFilter = dataListMatch.filter { it.eventName?.contains(textFilter, true)?:false }
         favorites.clear()
         favorites.addAll(dataFilter)
@@ -144,15 +144,6 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
                     }
                 }
             }
-        }
-    }
-
-    companion object {
-        fun newInstance(): FavoriteMatchesFragment {
-            val fragment = FavoriteMatchesFragment()
-            val args = Bundle()
-            fragment.arguments = args
-            return fragment
         }
     }
 

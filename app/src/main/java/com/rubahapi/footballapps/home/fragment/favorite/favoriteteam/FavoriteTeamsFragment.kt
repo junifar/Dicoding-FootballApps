@@ -32,7 +32,7 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
     private lateinit var teamRecyclerView: RecyclerView
     private lateinit var adapter: FavoriteTeamAdapter
     private var favoriteTeam:MutableList<Teams> = mutableListOf()
-    lateinit var dataListTeam:List<Teams>
+    private lateinit var dataListTeam:List<Teams>
 
     override fun createView(ui: AnkoContext<Context>):View{
         return setupUI(ui)
@@ -68,10 +68,8 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
 
     private fun callConfiguration() {
         adapter = FavoriteTeamAdapter(favoriteTeam){
-//            startActivity<FavoriteDetailMatchActivity>("id" to it.eventID)
-            val team:Team = Team(it.teamID, it.teamName, it.teamBadge, it.intFormedYear?.toInt(), it.strStadium, it.strDescription)
+            val team = Team(it.teamID, it.teamName, it.teamBadge, it.intFormedYear?.toInt(), it.strStadium, it.strDescription)
             startActivity<TeamDetailActivity>("item" to team)
-//            toast(it.teamName.toString())
         }
 
         teamRecyclerView.adapter = adapter
@@ -132,7 +130,7 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
 //        }
     }
 
-    fun FilterList(textFilter:String){
+    fun filterList(textFilter:String){
         val dataFilter = dataListTeam.filter { it.teamName?.contains(textFilter, true)?:false }
         favoriteTeam.clear()
         favoriteTeam.addAll(dataFilter)
@@ -147,13 +145,6 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
         progressBar.invisible()
     }
 
-    companion object {
-        fun newInstance(): FavoriteTeamsFragment {
-            val fragment = FavoriteTeamsFragment()
-            val args = Bundle()
-            fragment.arguments = args
-            return fragment
-        }
-    }
+    companion object
 
 }

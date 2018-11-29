@@ -15,11 +15,11 @@ import org.jetbrains.anko.*
 
 class PlayerDetailActivity: AppCompatActivity(){
 
-    lateinit var imageViewPlayer:ImageView
-    lateinit var textWeight:TextView
-    lateinit var textHeight:TextView
-    lateinit var textDescription:TextView
-    lateinit var textPlayerPosition:TextView
+    private lateinit var imageViewPlayer:ImageView
+    private lateinit var textWeight:TextView
+    private lateinit var textHeight:TextView
+    private lateinit var textDescription:TextView
+    private lateinit var textPlayerPosition:TextView
 
     lateinit var item:Player
 

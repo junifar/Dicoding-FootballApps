@@ -39,7 +39,7 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
     private lateinit var presenter: PastMatchPresenter
     private lateinit var pastMatchAdapter: PastMatchAdapter
     private var pastMatches: MutableList<Match> = mutableListOf()
-    lateinit var dataListMatch:List<Match>
+    private lateinit var dataListMatch:List<Match>
 
     override fun createView(ui: AnkoContext<Context>):View{
         return setupUI(ui)
@@ -110,15 +110,6 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
         }
     }
 
-    companion object {
-        fun newInstance(): PastMatchFragment {
-            val fragment = PastMatchFragment()
-            val args = Bundle()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
     override fun showLoading() {
         progressBar.visible()
     }
@@ -139,7 +130,7 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
         }
     }
 
-    fun FilterList(textFilter:String){
+    fun filterList(textFilter:String){
         val dataFilter = dataListMatch.filter { it.eventName?.contains(textFilter, true)?:false }
         pastMatches.clear()
         pastMatches.addAll(dataFilter)

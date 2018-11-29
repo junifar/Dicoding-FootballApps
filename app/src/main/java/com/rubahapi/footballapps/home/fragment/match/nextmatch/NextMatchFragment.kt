@@ -39,7 +39,7 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
     private lateinit var presenter: NextMatchPresenter
     private lateinit var nextMatchAdapter: NextMatchAdapter
     private var nextMatches: MutableList<Match> = mutableListOf()
-    lateinit var dataListMatch:List<Match>
+    private lateinit var dataListMatch:List<Match>
 
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
@@ -142,20 +142,13 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
         nextMatchAdapter.notifyDataSetChanged()
     }
 
-    fun FilterList(textFilter:String){
+    fun filterList(textFilter:String){
         val dataFilter = dataListMatch.filter { it.eventName?.contains(textFilter, true)?:false }
         nextMatches.clear()
         nextMatches.addAll(dataFilter)
         nextMatchAdapter.notifyDataSetChanged()
     }
 
-    companion object {
-        fun newInstance(): NextMatchFragment {
-            val fragment = NextMatchFragment()
-            val args = Bundle()
-            fragment.arguments = args
-            return fragment
-        }
-    }
+    companion object
 
 }

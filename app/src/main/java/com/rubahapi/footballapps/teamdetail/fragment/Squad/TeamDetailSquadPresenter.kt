@@ -3,9 +3,7 @@ package com.rubahapi.footballapps.teamdetail.fragment.Squad
 import com.google.gson.Gson
 import com.rubahapi.footballapps.api.ApiRepository
 import com.rubahapi.footballapps.api.TheSportDBApi
-import com.rubahapi.footballapps.models.LeagueResponse
 import com.rubahapi.footballapps.models.PlayerResponse
-import com.rubahapi.footballapps.models.TeamResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

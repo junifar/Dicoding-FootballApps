@@ -32,7 +32,7 @@ import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class TeamFragment:Fragment(), AnkoComponent<Context>, TeamView {
-    lateinit var appBarLayout: AppBarLayout
+    private lateinit var appBarLayout: AppBarLayout
 
     private lateinit var spinner: Spinner
     private lateinit var swipeRefresh: SwipeRefreshLayout
@@ -104,7 +104,7 @@ class TeamFragment:Fragment(), AnkoComponent<Context>, TeamView {
         teamLeagueAdapter.notifyDataSetChanged()
     }
 
-    fun FilterList(textFilter:String){
+    fun filterList(textFilter:String){
         val dataFilter = teamData.filter { it.teamName?.contains(textFilter, true)?:false }
         teamLeague.clear()
         teamLeague.addAll(dataFilter)

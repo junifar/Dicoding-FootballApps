@@ -26,9 +26,9 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
-    lateinit var layoutTab: TabLayout
-    lateinit var appBarLayout: AppBarLayout
-    lateinit var viewPager: ViewPager
+    private lateinit var layoutTab: TabLayout
+    private lateinit var appBarLayout: AppBarLayout
+    private lateinit var viewPager: ViewPager
 
     lateinit var favoriteTeamsFragment:FavoriteTeamsFragment
     lateinit var favoriteMatchFragment:FavoriteMatchesFragment
@@ -107,9 +107,9 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
         }
     }
 
-    fun FilterList(textFilter:String){
-        favoriteMatchFragment.FilterList(textFilter)
-        favoriteTeamsFragment.FilterList(textFilter)
+    fun filterList(textFilter:String){
+        favoriteMatchFragment.filterList(textFilter)
+        favoriteTeamsFragment.filterList(textFilter)
     }
 
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
