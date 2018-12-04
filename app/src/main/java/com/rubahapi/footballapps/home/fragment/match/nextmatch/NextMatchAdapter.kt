@@ -111,7 +111,7 @@ class NextMatchViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         val date = dateFormat.parse(match.eventDate)
 
-        val timeFormat = SimpleDateFormat("HH:mm:ssXXX")
+        val timeFormat = SimpleDateFormat("HH:mm:ssZZZ")
         timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
         val timeDate = timeFormat.parse(match.strTime)
 
