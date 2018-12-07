@@ -144,4 +144,11 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
         pastMatches.addAll(data)
         pastMatchAdapter.notifyDataSetChanged()
     }
+
+    override fun showBlankMatch() {
+        swipeRefresh.isRefreshing = false
+        dataListMatch = mutableListOf()
+        pastMatches.clear()
+        pastMatchAdapter.notifyDataSetChanged()
+    }
 }

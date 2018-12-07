@@ -27,7 +27,7 @@ class PastMatchPresenter(private val view: PastMatchView,
         GlobalScope.launch(Dispatchers.Main){
             val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getLastMatch(leagueID.toString())).await(),
                 MatchResponse::class.java)
-            view.showPastMatch(data.nextMatches)
+            if(data.nextMatches.isNullOrEmpty()) view.showBlankMatch() else view.showPastMatch(data.nextMatches)
             view.hideLoading()
         }
     }

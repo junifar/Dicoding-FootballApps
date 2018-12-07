@@ -71,6 +71,7 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+//        if (savedInstanceState == null)
         callConfiguration()
     }
 
@@ -139,6 +140,13 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
         dataListMatch = data
         nextMatches.clear()
         nextMatches.addAll(data)
+        nextMatchAdapter.notifyDataSetChanged()
+    }
+
+    override fun showBlankMatch() {
+        swipeRefresh.isRefreshing = false
+        dataListMatch = mutableListOf()
+        nextMatches.clear()
         nextMatchAdapter.notifyDataSetChanged()
     }
 

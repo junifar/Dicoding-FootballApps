@@ -8,4 +8,5 @@ interface PastMatchView{
     fun hideLoading()
     fun showLeagueList(data: LeagueResponse)
     fun showPastMatch(data: List<Match>)
+    fun showBlankMatch()
 }

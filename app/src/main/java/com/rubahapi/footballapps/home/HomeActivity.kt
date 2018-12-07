@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import android.view.Menu
+import android.view.MenuItem
 import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.home.fragment.FavoriteFragment
 import com.rubahapi.footballapps.home.fragment.MatchFragment
@@ -19,6 +20,8 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private lateinit var page:String
 
     private val pageArray = arrayOf("match", "teams", "favorite")
+
+    lateinit var menuItem: MenuItem
 
     private val fm = supportFragmentManager
 
@@ -63,6 +66,8 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                                 fragment.filterList(query)
                         }
             else-> {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
+                    menuItem.isVisible = false
                     val fragment = fm.findFragmentById(R.id.home_container) as FavoriteFragment
                     if (query!=null)
                             fragment.filterList(query)
@@ -75,6 +80,9 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         menuInflater.inflate(R.menu.menu_search, menu)
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu?.findItem(R.id.action_search)?.actionView as SearchView
+
+        menuItem = menu.findItem(R.id.action_search) as MenuItem
+
         searchView.setSearchableInfo(
             searchManager
                 .getSearchableInfo(componentName)

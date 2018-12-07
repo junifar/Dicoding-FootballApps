@@ -27,7 +27,7 @@ class NextMatchPresenter(private val view: NextMatchView,
         GlobalScope.launch(Dispatchers.Main){
             val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getNextMatch(leagueID.toString())).await(),
                 MatchResponse::class.java)
-            view.showNextMatch(data.nextMatches)
+            if(data.nextMatches.isNullOrEmpty()) view.showBlankMatch() else view.showNextMatch(data.nextMatches)
             view.hideLoading()
         }
     }
