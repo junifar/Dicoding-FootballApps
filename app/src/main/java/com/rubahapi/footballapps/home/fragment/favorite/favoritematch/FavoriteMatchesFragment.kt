@@ -55,14 +55,7 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, FavoriteView
 
     private fun callConfiguration(){
         adapter = FavoriteAdapter(favorites){
-//            val fav = Match(
-//                it.eventID?.toInt(), it.eventName, it.eventDate, it.eventThumb, it.homeScore?.toInt(), it.awayScore?.toInt(),
-//                it.idHome?.toInt(), it.idAway?.toInt(), it.homeTeam, it.awayTeam,
-//                it.homeShoot, it.awayShoot, it.homeGoalKeeper, it.awayGoalKeeper, it.homeDefense, it.awayDefense, it.homeMidField,
-//                it.awayMidField, it.homeForward, it.awayForward, it.homeSubstitute, it.awaySubstitute,
-//                it.homeGoalDetails, it.awayGoalDetails, it.strTime)
             startActivity<FavoriteDetailMatchActivity>("id" to it.eventID)
-//            startActivity<NextMatchDetailActivity>("item" to fav)
         }
 
         favoriteList.adapter = adapter

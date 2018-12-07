@@ -117,7 +117,7 @@ class NextMatchViewHolder(view: View): RecyclerView.ViewHolder(view) {
         }
 
         if (!match.strTime.isNullOrBlank()){
-            val timeFormat = SimpleDateFormat("HH:mm:ssXXX")
+            val timeFormat = SimpleDateFormat("HH:mm:ssZZZ")
             timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
             val timeDate = timeFormat.parse(match.strTime)
             eventTime.text = toSimpleTimeString(timeDate)
@@ -126,7 +126,6 @@ class NextMatchViewHolder(view: View): RecyclerView.ViewHolder(view) {
         }
 
         eventName.text = match.eventName
-
 
         itemView.setOnClickListener { listener(match) }
     }

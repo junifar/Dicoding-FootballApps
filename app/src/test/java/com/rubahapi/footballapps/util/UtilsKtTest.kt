@@ -17,7 +17,8 @@ class UtilsKtTest {
 
     @Test
     fun toSimpleTimeString() {
-        val timeFormat = SimpleDateFormat("HH:mm:ssXXX")
+//        val timeFormat = SimpleDateFormat("HH:mm:ssXXX")
+        val timeFormat = SimpleDateFormat("HH:mm:ssZ")
         timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
         val timeDate = timeFormat.parse("00:00:00+00:00")
         assertEquals("07:00", toSimpleTimeString(timeDate))
