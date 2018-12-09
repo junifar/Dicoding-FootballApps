@@ -12,6 +12,7 @@ import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.R.id.event_date
 import com.rubahapi.footballapps.db.Favorite
 import com.rubahapi.footballapps.util.toSimpleString
+import com.rubahapi.footballapps.util.toSimpleStringGMT
 import com.rubahapi.footballapps.util.toSimpleTimeString
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
@@ -130,20 +131,55 @@ class FavoriteViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val eventTime: TextView = view.find(R.id.event_time)
 
     fun bindItem(favorite: Favorite, listener: (Favorite) -> Unit) {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val date = dateFormat.parse(favorite.eventDate)
+        var strTime: String? = favorite.strTime
 
-        val timeFormat = SimpleDateFormat("HH:mm:ssZZZ")
-        timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
-        val timeDate = timeFormat.parse(favorite.strTime)
+        var eventDateVal:String? = "${favorite.eventDate} ${favorite.strTime}"
+
+//        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+//        val date = dateFormat.parse(favorite.eventDate)
+
+//        val timeFormat = SimpleDateFormat("HH:mm:ssZZZ")
+//        timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
+//        val timeDate = timeFormat.parse(favorite.strTime)
+
+        if (!favorite.eventDate.isNullOrBlank() && !favorite.strTime.isNullOrBlank()){
+            if (strTime?.contains("+") == false){
+                eventDateVal = "$eventDateVal+00:00"
+            }
+
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ssZZZ")
+            dateFormat.timeZone = (TimeZone.getTimeZone("GMT"))
+
+            val date = dateFormat.parse(eventDateVal)
+            eventDate.text = toSimpleStringGMT(date)
+        }else if (!favorite.eventDate.isNullOrBlank()){
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val date = dateFormat.parse(favorite.eventDate)
+            eventDate.text = toSimpleString(date)
+        }else{
+            eventDate.text = "-"
+        }
+
+        if (strTime?.contains("+") == false){
+            strTime = "$strTime+00:00"
+        }
+
+        if (!favorite.strTime.isNullOrBlank()){
+            val timeFormat = SimpleDateFormat("HH:mm:ssZZZ")
+            timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
+            val timeDate = timeFormat.parse(strTime)
+            eventTime.text = toSimpleTimeString(timeDate)
+        }else{
+            eventTime.text = "00:00"
+        }
 
         homeTeam.text = favorite.homeTeam
         awayTeam.text = favorite.awayTeam
         homeScore.text = favorite.homeScore ?: "0"
         awayScore.text = favorite.awayScore ?: "0"
 //        eventDate.text = favorite.eventDate
-        eventDate.text = toSimpleString(date)
-        eventTime.text = toSimpleTimeString(timeDate)
+//        eventDate.text = toSimpleString(date)
+//        eventTime.text = toSimpleTimeString(timeDate)
         itemView.setOnClickListener { listener(favorite) }
     }
 }

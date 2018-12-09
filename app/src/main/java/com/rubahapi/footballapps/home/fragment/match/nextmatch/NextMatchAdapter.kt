@@ -11,6 +11,7 @@ import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.R.id.*
 import com.rubahapi.footballapps.models.Match
 import com.rubahapi.footballapps.util.toSimpleString
+import com.rubahapi.footballapps.util.toSimpleStringGMT
 import com.rubahapi.footballapps.util.toSimpleTimeString
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
@@ -108,7 +109,15 @@ class NextMatchViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val eventTime: TextView = view.find(event_time)
 
     fun bindItem(match: Match, listener: (Match)-> Unit){
-        if (!match.eventDate.isNullOrBlank()){
+        val eventDateVal:String? = "${match.eventDate} ${match.strTime}"
+
+        if (!match.eventDate.isNullOrBlank() && !match.strTime.isNullOrBlank()){
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ssZZZ")
+            dateFormat.timeZone = (TimeZone.getTimeZone("GMT"))
+
+            val date = dateFormat.parse(eventDateVal)
+            eventDate.text = toSimpleStringGMT(date)
+        }else if (!match.eventDate.isNullOrBlank()){
             val dateFormat = SimpleDateFormat("yyyy-MM-dd")
             val date = dateFormat.parse(match.eventDate)
             eventDate.text = toSimpleString(date)

@@ -19,6 +19,13 @@ fun toSimpleString(date: Date?): String? = with(date ?: Date()) {
 }
 
 @SuppressLint("SimpleDateFormat")
+fun toSimpleStringGMT(date: Date?): String? = with(date ?: Date()) {
+    val sdf = SimpleDateFormat("EEE, dd MMM yyy")
+    sdf.timeZone = (TimeZone.getTimeZone("GMT+07:00"))
+    sdf.format(this)
+}
+
+@SuppressLint("SimpleDateFormat")
 fun toSimpleTimeString(date:Date?):String? = with(date ?: Date()){
     val sdf = SimpleDateFormat("HH:mm")
     sdf.timeZone = (TimeZone.getTimeZone("GMT+07:00"))
