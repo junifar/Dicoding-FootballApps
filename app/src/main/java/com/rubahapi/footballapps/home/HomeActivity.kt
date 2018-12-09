@@ -23,6 +23,8 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     lateinit var menuItem: MenuItem
 
+    private var hideMenu = false
+
     private val fm = supportFragmentManager
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -66,8 +68,9 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                                 fragment.filterList(query)
                         }
             else-> {
-                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
-                    menuItem.isVisible = false
+//                    hideMenu = true
+//                    invalidateOptionsMenu()
+//                menuItem.isEnabled = false
                     val fragment = fm.findFragmentById(R.id.home_container) as FavoriteFragment
                     if (query!=null)
                             fragment.filterList(query)
@@ -82,6 +85,8 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val searchView = menu?.findItem(R.id.action_search)?.actionView as SearchView
 
         menuItem = menu.findItem(R.id.action_search) as MenuItem
+
+//        if(hideMenu) menuItem.isVisible = false
 
         searchView.setSearchableInfo(
             searchManager

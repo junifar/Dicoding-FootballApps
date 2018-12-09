@@ -9,9 +9,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.home.fragment.favorite.favoritematch.FavoriteMatchesFragment
 import com.rubahapi.footballapps.home.fragment.favorite.favoriteteam.FavoriteTeamsFragment
@@ -21,6 +18,9 @@ import org.jetbrains.anko.design.tabLayout
 import org.jetbrains.anko.design.themedAppBarLayout
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.viewPager
+import android.support.v7.app.AppCompatActivity
+import android.view.*
+
 
 class FavoriteFragment: Fragment(), AnkoComponent<Context> {
 
@@ -35,6 +35,16 @@ class FavoriteFragment: Fragment(), AnkoComponent<Context> {
 
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity).supportActionBar!!.hide()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity).supportActionBar!!.show()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
