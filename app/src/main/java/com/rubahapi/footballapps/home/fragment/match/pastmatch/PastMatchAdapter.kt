@@ -108,6 +108,7 @@ class NextMatchViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val eventTime: TextView = view.find(R.id.event_time)
 
     fun bindItem(match: Match, listener: (Match)-> Unit){
+        var strTime: String? = match.strTime
         if (!match.eventDate.isNullOrBlank()){
             val dateFormat = SimpleDateFormat("yyyy-MM-dd")
             val date = dateFormat.parse(match.eventDate)
@@ -116,10 +117,14 @@ class NextMatchViewHolder(view: View): RecyclerView.ViewHolder(view) {
             eventDate.text = "-"
         }
 
+        if (strTime?.contains("+") == false){
+           strTime = "$strTime+00:00"
+        }
+
         if (!match.strTime.isNullOrBlank()){
             val timeFormat = SimpleDateFormat("HH:mm:ssZZZ")
             timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
-            val timeDate = timeFormat.parse(match.strTime)
+            val timeDate = timeFormat.parse(strTime)
             eventTime.text = toSimpleTimeString(timeDate)
         }else{
             eventTime.text = "00:00"
