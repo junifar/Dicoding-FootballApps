@@ -21,7 +21,7 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val pageArray = arrayOf("match", "teams", "favorite")
 
-    lateinit var menuItem: MenuItem
+    private lateinit var menuItem: MenuItem
 
     private var hideMenu = false
 

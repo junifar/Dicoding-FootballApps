@@ -135,13 +135,6 @@ class FavoriteViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
         var eventDateVal:String? = "${favorite.eventDate} ${favorite.strTime}"
 
-//        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-//        val date = dateFormat.parse(favorite.eventDate)
-
-//        val timeFormat = SimpleDateFormat("HH:mm:ssZZZ")
-//        timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
-//        val timeDate = timeFormat.parse(favorite.strTime)
-
         if (!favorite.eventDate.isNullOrBlank() && !favorite.strTime.isNullOrBlank()){
             if (strTime?.contains("+") == false){
                 eventDateVal = "$eventDateVal+00:00"
@@ -177,9 +170,6 @@ class FavoriteViewHolder(view: View): RecyclerView.ViewHolder(view) {
         awayTeam.text = favorite.awayTeam
         homeScore.text = favorite.homeScore ?: "0"
         awayScore.text = favorite.awayScore ?: "0"
-//        eventDate.text = favorite.eventDate
-//        eventDate.text = toSimpleString(date)
-//        eventTime.text = toSimpleTimeString(timeDate)
         itemView.setOnClickListener { listener(favorite) }
     }
 }

@@ -19,27 +19,12 @@ class FavoriteDetailMatchPresenter(private val view: FavoriteDetailMatchView,
         }
     }
 
-//    suspend fun showAwayFlagAwait(data: TeamResponse){
-//        view.showAwayFlag(data.teams)
-//    }
-
     fun getAwayFlag(teamID: String){
-//        val data = GlobalScope.async { gson.fromJson(apiRepository.doRequest(TheSportDBApi.getTeamFlag(teamID)).await(),
-//            TeamResponse::class.java) }
-//
-//        GlobalScope.async {
-//            view.showAwayFlag(data.await().teams)
-//        }
-//
-//        GlobalScope.async {
-//            view.showHomeFlag(data.await().teams)
-//        }
         GlobalScope.launch(Dispatchers.Main) {
             val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getTeamFlag(teamID)).await(),
                 TeamResponse::class.java)
 
             view.showAwayFlag(data.teams)
-//            view.showHomeFlag(data.teams)
         }
     }
 }

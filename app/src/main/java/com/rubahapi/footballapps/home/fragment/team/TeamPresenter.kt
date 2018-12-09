@@ -31,14 +31,4 @@ class TeamPresenter(private val view: TeamFragment,
             view.hideLoading()
         }
     }
-
-//    fun getMatch(leagueID:Int){
-//        view.showLoading()
-//        GlobalScope.launch(Dispatchers.Main){
-//            val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getNextMatch(leagueID.toString())).await(),
-//                MatchResponse::class.java)
-//            view.showNextMatch(data.nextMatches)
-//            view.hideLoading()
-//        }
-//    }
 }

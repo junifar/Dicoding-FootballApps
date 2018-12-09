@@ -42,7 +42,6 @@ object TheSportDBApi {
     }
 
     fun getTeamLeague(name: String):String{
-        //https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?l=English%20Premier%20League
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
             .appendPath("api")
             .appendPath("v1")
@@ -56,15 +55,6 @@ object TheSportDBApi {
 
     fun getNextMatch(id: String?): String{
         return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/eventsnextleague.php?id=" + id
-//        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
-//            .appendPath("api")
-//            .appendPath("v1")
-//            .appendPath("json")
-//            .appendPath(BuildConfig.TSDB_API_KEY)
-//            .appendPath("eventsnextleague.php")
-//            .appendQueryParameter("id", id)
-//            .build()
-//            .toString()
     }
 
     fun getLastMatch(id:String): String{

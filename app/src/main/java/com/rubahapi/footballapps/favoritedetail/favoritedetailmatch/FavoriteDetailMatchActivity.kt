@@ -54,7 +54,6 @@ class FavoriteDetailMatchActivity: AppCompatActivity(), FavoriteDetailMatchView{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        favorite = intent.getParcelableExtra("items")
         eventID = intent.getStringExtra("id")
 
         supportActionBar?.title = "Match Detail"
@@ -632,16 +631,6 @@ class FavoriteDetailMatchActivity: AppCompatActivity(), FavoriteDetailMatchView{
                     backgroundColor = Color.LTGRAY
                 }
             }
-//            swipeRefresh = swipeRefreshLayout {
-//                setColorSchemeResources(
-//                    colorAccent,
-//                    android.R.color.holo_green_light,
-//                    android.R.color.holo_orange_light,
-//                    android.R.color.holo_red_light
-//                )
-//
-//            }
-
         }
     }
 }

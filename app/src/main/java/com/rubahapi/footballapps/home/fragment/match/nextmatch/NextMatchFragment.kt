@@ -71,7 +71,6 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        if (savedInstanceState == null)
         callConfiguration()
     }
 

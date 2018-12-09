@@ -119,15 +119,6 @@ class FavoriteTeamsFragment: Fragment(), AnkoComponent<Context>, FavoriteTeamVie
                 }
             }
         }
-//        coordinatorLayout{
-//            lparams(
-//                width = matchParent,
-//                height = matchParent
-//            )
-//            textView {
-//                text = "Favorite Teams Fragment"
-//            }
-//        }
     }
 
     fun filterList(textFilter:String){

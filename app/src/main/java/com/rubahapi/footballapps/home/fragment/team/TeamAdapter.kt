@@ -79,14 +79,10 @@ class TeamsUI : AnkoComponent<ViewGroup>{
 class TeamViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val eventName: TextView = view.find(event_name)
     private val eventThumb: ImageView = view.find(R.id.event_thumb)
-//    private val eventDate: TextView = view.find(event_date)
 
     fun bindItem(teamLeague: Team, listener: (Team)-> Unit){
-//        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-//        val date = dateFormat.parse(teamLeague.eventDate)
         eventName.text = teamLeague.teamName
         Picasso.get().load(teamLeague.teamBadge).fit().into(eventThumb)
-//        eventDate.text = toSimpleString(date)
 
         itemView.setOnClickListener { listener(teamLeague) }
     }

@@ -169,10 +169,6 @@ class TeamFragment:Fragment(), AnkoComponent<Context>, TeamView {
                     }
                 }
             }
-
-//            textView {
-//                text = "Team test"
-//            }
         }
     }
 }
