@@ -14,8 +14,8 @@ import com.rubahapi.footballapps.R
 import com.rubahapi.footballapps.db.Teams
 import com.rubahapi.footballapps.db.database
 import com.rubahapi.footballapps.models.Team
-import com.rubahapi.footballapps.teamdetail.fragment.Description.TeamDetailDescriptionFragment
-import com.rubahapi.footballapps.teamdetail.fragment.Squad.TeamDetailSquadFragment
+import com.rubahapi.footballapps.teamdetail.fragment.description.TeamDetailDescriptionFragment
+import com.rubahapi.footballapps.teamdetail.fragment.squad.TeamDetailSquadFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_team_detail.*
 import org.jetbrains.anko.db.classParser

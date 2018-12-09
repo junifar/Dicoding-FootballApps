@@ -1,4 +1,4 @@
-package com.rubahapi.footballapps.teamdetail.fragment.Description
+package com.rubahapi.footballapps.teamdetail.fragment.description
 
 import com.rubahapi.footballapps.models.Team
 import kotlinx.coroutines.Dispatchers

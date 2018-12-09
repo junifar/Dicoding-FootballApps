@@ -1,4 +1,4 @@
-package com.rubahapi.footballapps.teamdetail.fragment.Squad
+package com.rubahapi.footballapps.teamdetail.fragment.squad
 
 import com.rubahapi.footballapps.models.Player
 

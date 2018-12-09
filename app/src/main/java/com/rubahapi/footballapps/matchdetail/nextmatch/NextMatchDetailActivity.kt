@@ -21,6 +21,9 @@ import com.rubahapi.footballapps.db.Favorite
 import com.rubahapi.footballapps.db.database
 import com.rubahapi.footballapps.models.Match
 import com.rubahapi.footballapps.models.Team
+import com.rubahapi.footballapps.util.toSimpleString
+import com.rubahapi.footballapps.util.toSimpleStringGMT
+import com.rubahapi.footballapps.util.toSimpleTimeString
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
@@ -28,6 +31,8 @@ import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NextMatchDetailActivity: AppCompatActivity(), NextMatchView{
     private lateinit var imageHomeMatch:ImageView
@@ -42,6 +47,7 @@ class NextMatchDetailActivity: AppCompatActivity(), NextMatchView{
     private lateinit var id: String
 
     private lateinit var dateEvent:TextView
+    private lateinit var timeEvent:TextView
     lateinit var item: Match
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +67,37 @@ class NextMatchDetailActivity: AppCompatActivity(), NextMatchView{
 
         id = item.eventID.toString()
         favoriteState()
+
+        val eventDateVal:String? = "${item.eventDate} ${item.strTime}"
+
+        if (!item.eventDate.isNullOrBlank() && !item.strTime.isNullOrBlank()){
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ssZZZ")
+            dateFormat.timeZone = (TimeZone.getTimeZone("GMT"))
+
+            val date = dateFormat.parse(eventDateVal)
+            dateEvent.text = toSimpleStringGMT(date)
+        }else if (!item.eventDate.isNullOrBlank()){
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val date = dateFormat.parse(item.eventDate)
+            dateEvent.text = toSimpleString(date)
+        }else{
+            dateEvent.text = "-"
+        }
+
+        var strTime: String? = item.strTime
+
+        if (strTime?.contains("+") == false){
+            strTime = "$strTime+00:00"
+        }
+
+        if (!item.strTime.isNullOrBlank()){
+            val timeFormat = SimpleDateFormat("HH:mm:ssZZZ")
+            timeFormat.timeZone = (TimeZone.getTimeZone("GMT"))
+            val timeDate = timeFormat.parse(strTime)
+            timeEvent.text = toSimpleTimeString(timeDate)
+        }else{
+            timeEvent.text = "00:00"
+        }
 
         supportActionBar?.title = "Match Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -242,7 +279,7 @@ class NextMatchDetailActivity: AppCompatActivity(), NextMatchView{
                 }
 
                 dateEvent = textView {
-                    text = item.eventDate.toString()
+//                    text = item.eventDate.toString()
                     textSize = 16f
                     textColor = Color.GREEN
                     setTypeface(null, Typeface.BOLD)
@@ -254,7 +291,20 @@ class NextMatchDetailActivity: AppCompatActivity(), NextMatchView{
                     margin = dip(10)
                 }
 
-                dateEvent = textView {
+                timeEvent = textView {
+//                    text = item.eventDate.toString()
+                    textSize = 16f
+                    textColor = Color.GREEN
+                    setTypeface(null, Typeface.BOLD)
+                    textAlignment = View.TEXT_ALIGNMENT_CENTER
+                }.lparams(
+                    width = matchParent,
+                    height = wrapContent
+                ){
+                    margin = dip(10)
+                }
+
+                textView {
                     text = item.eventName.toString()
                     textSize = 14f
 //                textColor = Color.GREEN

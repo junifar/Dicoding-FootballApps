@@ -1,4 +1,4 @@
-package com.rubahapi.footballapps.teamdetail.fragment.Squad
+package com.rubahapi.footballapps.teamdetail.fragment.squad
 
 import com.google.gson.Gson
 import com.rubahapi.footballapps.api.ApiRepository

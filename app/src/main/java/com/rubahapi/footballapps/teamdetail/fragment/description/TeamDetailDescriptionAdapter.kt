@@ -1,4 +1,4 @@
-package com.rubahapi.footballapps.teamdetail.fragment.Description
+package com.rubahapi.footballapps.teamdetail.fragment.description
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

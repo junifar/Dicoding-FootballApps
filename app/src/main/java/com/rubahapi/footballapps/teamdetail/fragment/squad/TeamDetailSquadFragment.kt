@@ -1,4 +1,4 @@
-package com.rubahapi.footballapps.teamdetail.fragment.Description
+package com.rubahapi.footballapps.teamdetail.fragment.squad
 
 import android.content.Context
 import android.os.Bundle
@@ -10,25 +10,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import com.google.gson.Gson
 import com.rubahapi.footballapps.R
-import com.rubahapi.footballapps.models.Team
+import com.rubahapi.footballapps.api.ApiRepository
+import com.rubahapi.footballapps.models.Player
+import com.rubahapi.footballapps.playerdetail.PlayerDetailActivity
 import com.rubahapi.footballapps.util.invisible
 import com.rubahapi.footballapps.util.visible
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class TeamDetailDescriptionFragment : Fragment(), AnkoComponent<Context>, TeamDetailDescriptionView {
+class TeamDetailSquadFragment : Fragment(), AnkoComponent<Context>, TeamDetailSquadView {
 
-//    lateinit var textDescription: TextView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var progressBar: ProgressBar
-    private lateinit var teamRecyclerView: RecyclerView
+    private lateinit var playerRecyclerView: RecyclerView
 
-    private lateinit var presenter: TeamDetailDescriptionPresenter
+    private lateinit var presenter: TeamDetailSquadPresenter
+    private var players:MutableList<Player> = mutableListOf()
+    private lateinit var playerAdapter: PlayerAdapter
 
-    private lateinit var teamLeagueAdapter: TeamDetailDescriptionAdapter
-    private var teamLeague: MutableList<Team> = mutableListOf()
+    private lateinit var id:String
 
     override fun createView(ui: AnkoContext<Context>): View {
         return setupUI(ui)
@@ -39,17 +43,25 @@ class TeamDetailDescriptionFragment : Fragment(), AnkoComponent<Context>, TeamDe
     }
 
     private fun callConfiguration(){
-//        textDescription.text = arguments?.getString("description") ?: ""
-        presenter = TeamDetailDescriptionPresenter(this)
-        presenter.getTeamLeague(arguments?.getString("description") ?: "")
+        id = arguments?.getString("id") ?: "0"
+
+        val request = ApiRepository()
+        val gson = Gson()
+
+        presenter = TeamDetailSquadPresenter(this, request, gson)
+        presenter.getPlayer(id)
 
         swipeRefresh.setOnRefreshListener {
-            presenter.getTeamLeague(arguments?.getString("description") ?: "")
+            presenter.getPlayer(id)
             swipeRefresh.isRefreshing = false
         }
 
-        teamLeagueAdapter = TeamDetailDescriptionAdapter(teamLeague){}
-        teamRecyclerView.adapter = teamLeagueAdapter
+        playerAdapter = PlayerAdapter(players){
+//            toast(it.idPlayer.toString())
+            startActivity<PlayerDetailActivity>("item" to it)
+        }
+
+        playerRecyclerView.adapter = playerAdapter
     }
 
 
@@ -67,11 +79,11 @@ class TeamDetailDescriptionFragment : Fragment(), AnkoComponent<Context>, TeamDe
         progressBar.invisible()
     }
 
-    override fun showTeamLeague(data: List<Team>) {
+    override fun showPlayer(data: List<Player>) {
         swipeRefresh.isRefreshing = false
-        teamLeague.clear()
-        teamLeague.addAll(data)
-        teamLeagueAdapter.notifyDataSetChanged()
+        players.clear()
+        players.addAll(data)
+        playerAdapter.notifyDataSetChanged()
     }
 
     private fun setupUI(ui:AnkoContext<Context>) = with(ui){
@@ -80,6 +92,8 @@ class TeamDetailDescriptionFragment : Fragment(), AnkoComponent<Context>, TeamDe
                 width = matchParent
                 height = matchParent
             }
+
+            fitsSystemWindows = false
 
             swipeRefresh = swipeRefreshLayout {
                 setColorSchemeResources(
@@ -93,7 +107,7 @@ class TeamDetailDescriptionFragment : Fragment(), AnkoComponent<Context>, TeamDe
                         height = wrapContent
                     }
 
-                    teamRecyclerView = recyclerView {
+                    playerRecyclerView = recyclerView {
                         lparams(
                             width = matchParent,
                             height =  matchParent
@@ -109,26 +123,17 @@ class TeamDetailDescriptionFragment : Fragment(), AnkoComponent<Context>, TeamDe
                 }
             }
 
-//            scrollView {
-//                lparams{
-//                    width = matchParent
-//                    height = matchParent
-//                }
-//
-//
-//                textDescription = textView {
-//                    text = "Team Detail Description Fragment"
-//                }
-//
+//            textView {
+//                text = "Team Detail Squad Fragment"
 //            }
         }
     }
 
     companion object {
-        fun newInstance(description:String): TeamDetailDescriptionFragment {
-            val fragment = TeamDetailDescriptionFragment()
+        fun newInstance(id:String): TeamDetailSquadFragment {
+            val fragment = TeamDetailSquadFragment()
             val args = Bundle()
-            args.putString("description", description)
+            args.putString("id", id)
             fragment.arguments = args
             return fragment
         }
