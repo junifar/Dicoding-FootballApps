@@ -81,8 +81,6 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         menuItem = menu.findItem(R.id.action_search) as MenuItem
 
-//        if(hideMenu) menuItem.isVisible = false
-
         searchView.setSearchableInfo(
             searchManager
                 .getSearchableInfo(componentName)
