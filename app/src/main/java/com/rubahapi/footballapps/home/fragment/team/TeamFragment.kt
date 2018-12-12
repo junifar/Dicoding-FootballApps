@@ -62,6 +62,7 @@ class TeamFragment:Fragment(), AnkoComponent<Context>, TeamView {
         val request = ApiRepository()
         val gson = Gson()
         presenter = TeamPresenter(this, request, gson)
+        onAttachView()
         presenter.getLeague()
 
         swipeRefresh.setOnRefreshListener {
@@ -110,6 +111,19 @@ class TeamFragment:Fragment(), AnkoComponent<Context>, TeamView {
         teamLeague.clear()
         teamLeague.addAll(dataFilter)
         teamLeagueAdapter.notifyDataSetChanged()
+    }
+
+    override fun onAttachView() {
+        presenter.onAttach(this)
+    }
+
+    override fun onDetachView() {
+        presenter.onDetach()
+    }
+
+    override fun onDestroy() {
+        onDetachView()
+        super.onDestroy()
     }
 
     private fun setupUI(ui:AnkoContext<Context>) = with(ui){

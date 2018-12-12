@@ -1,5 +1,6 @@
 package com.rubahapi.footballapps.home.fragment.match.nextmatch
 
+import android.support.v4.app.Fragment
 import com.google.gson.Gson
 import com.rubahapi.footballapps.api.ApiRepository
 import com.rubahapi.footballapps.api.TheSportDBApi
@@ -11,7 +12,18 @@ import kotlinx.coroutines.launch
 
 class NextMatchPresenter(private val view: NextMatchView,
                          private val apiRepository: ApiRepository,
-                         private val gson: Gson){
+                         private val gson: Gson): NextMatchPresenterView<NextMatchFragment>{
+
+    private var mView: Fragment? = null
+
+    override fun onAttach(view: NextMatchFragment) {
+        mView = view
+    }
+
+    override fun onDetach() {
+        mView = null
+    }
+
     fun getLeague(){
         view.showLoading()
         GlobalScope.launch(Dispatchers.Main) {

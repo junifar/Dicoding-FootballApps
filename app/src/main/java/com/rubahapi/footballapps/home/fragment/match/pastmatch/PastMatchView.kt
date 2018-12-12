@@ -9,4 +9,6 @@ interface PastMatchView{
     fun showLeagueList(data: LeagueResponse)
     fun showPastMatch(data: List<Match>)
     fun showBlankMatch()
+    fun onAttachView()
+    fun onDetachView()
 }

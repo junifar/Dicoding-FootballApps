@@ -58,6 +58,7 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
         val request = ApiRepository()
         val gson = Gson()
         presenter = PastMatchPresenter(this, request, gson)
+        onAttachView()
         presenter.getLeague()
 
         swipeRefresh.setOnRefreshListener {
@@ -151,5 +152,18 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
         dataListMatch = mutableListOf()
         pastMatches.clear()
         pastMatchAdapter.notifyDataSetChanged()
+    }
+
+    override fun onAttachView() {
+        presenter.onAttach(this)
+    }
+
+    override fun onDetachView() {
+        presenter.onDetach()
+    }
+
+    override fun onDestroy() {
+        onDetach()
+        super.onDestroy()
     }
 }

@@ -1,5 +1,6 @@
 package com.rubahapi.footballapps.home.fragment.team
 
+import android.support.v4.app.Fragment
 import com.google.gson.Gson
 import com.rubahapi.footballapps.api.ApiRepository
 import com.rubahapi.footballapps.api.TheSportDBApi
@@ -11,7 +12,18 @@ import kotlinx.coroutines.launch
 
 class TeamPresenter(private val view: TeamFragment,
                     private val apiRepository: ApiRepository,
-                    private val gson: Gson){
+                    private val gson: Gson): TeamPresenterView<TeamFragment>{
+
+    private var mView: Fragment? = null
+
+    override fun onAttach(view: TeamFragment) {
+        mView = view
+    }
+
+    override fun onDetach() {
+        mView = null
+    }
+
     fun getLeague(){
         view.showLoading()
         GlobalScope.launch(Dispatchers.Main) {

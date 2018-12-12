@@ -53,6 +53,7 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
         val request = ApiRepository()
         val gson = Gson()
         presenter = NextMatchPresenter(this, request, gson)
+        onAttachView()
         presenter.getLeague()
 
         swipeRefresh.setOnRefreshListener {
@@ -155,6 +156,19 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
         nextMatches.clear()
         nextMatches.addAll(dataFilter)
         nextMatchAdapter.notifyDataSetChanged()
+    }
+
+    override fun onAttachView() {
+        presenter.onAttach(this)
+    }
+
+    override fun onDetachView() {
+        presenter.onDetach()
+    }
+
+    override fun onDestroy() {
+        onDetachView()
+        super.onDestroy()
     }
 
     companion object

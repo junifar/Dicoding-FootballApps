@@ -9,4 +9,6 @@ interface NextMatchView{
     fun showLeagueList(data: LeagueResponse)
     fun showNextMatch(data: List<Match>)
     fun showBlankMatch()
+    fun onAttachView()
+    fun onDetachView()
 }

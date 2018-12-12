@@ -8,4 +8,6 @@ interface TeamView{
     fun hideLoading()
     fun showLeagueList(data: LeagueResponse)
     fun showTeamLeague(data: List<Team>)
+    fun onAttachView()
+    fun onDetachView()
 }
