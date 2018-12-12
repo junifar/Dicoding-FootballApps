@@ -85,6 +85,7 @@ class TeamFragment:Fragment(), AnkoComponent<Context>, TeamView {
     }
 
     override fun showLeagueList(data: LeagueResponse) {
+        if (activity != null){
         spinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, data.leagues)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -93,7 +94,7 @@ class TeamFragment:Fragment(), AnkoComponent<Context>, TeamView {
                 league = spinner.selectedItem as League
                 league.leagueName?.let { presenter.getTeamLeague(it) }
             }
-        }
+        }}
     }
 
     override fun showTeamLeague(data: List<Team>) {

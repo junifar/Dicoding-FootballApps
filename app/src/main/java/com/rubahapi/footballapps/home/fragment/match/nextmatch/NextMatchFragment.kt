@@ -123,6 +123,7 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
     }
 
     override fun showLeagueList(data: LeagueResponse) {
+        if (activity != null){
         spinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, data.leagues)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -131,7 +132,7 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>, NextMatchView {
                 league = spinner.selectedItem as League
                 league.leagueId?.let { presenter.getMatch(it) }
             }
-        }
+        }}
     }
 
     override fun showNextMatch(data: List<Match>) {

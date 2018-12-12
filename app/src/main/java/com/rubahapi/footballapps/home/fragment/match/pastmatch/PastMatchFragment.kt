@@ -119,6 +119,7 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
     }
 
     override fun showLeagueList(data: LeagueResponse) {
+        if (activity != null){
         spinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, data.leagues)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -127,7 +128,7 @@ class PastMatchFragment: Fragment(), AnkoComponent<Context>, PastMatchView{
                 league = spinner.selectedItem as League
                 league.leagueId?.let { presenter.getMatch(it) }
             }
-        }
+        }}
     }
 
     fun filterList(textFilter:String){
